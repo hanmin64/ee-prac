@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+  <rect width="1200" height="520" fill="#f8fafc"/>
+  <text x="600" y="48" text-anchor="middle" font-family="sans-serif" font-size="30" font-weight="700">5 V LED 限流實驗</text>
+  <path d="M120 260 H250" stroke="#d22" stroke-width="8"/><text x="120" y="225" font-family="sans-serif" font-size="26" fill="#d22">+5 V</text>
+  <polyline points="250,260 285,215 325,305 365,215 405,305 445,260" fill="none" stroke="#333" stroke-width="6"/>
+  <text x="350" y="185" text-anchor="middle" font-family="sans-serif" font-size="25">330 Ω</text>
+  <path d="M445 260 H600" stroke="#333" stroke-width="7"/>
+  <polygon points="600,195 600,325 720,260" fill="#ff4c4c" stroke="#822" stroke-width="5"/>
+  <line x1="735" y1="195" x2="735" y2="325" stroke="#333" stroke-width="7"/>
+  <path d="M735 260 H955" stroke="#333" stroke-width="7"/>
+  <line x1="955" y1="235" x2="955" y2="285" stroke="#2675d8" stroke-width="8"/><line x1="925" y1="285" x2="985" y2="285" stroke="#2675d8" stroke-width="8"/><line x1="935" y1="305" x2="975" y2="305" stroke="#2675d8" stroke-width="8"/><line x1="947" y1="325" x2="963" y2="325" stroke="#2675d8" stroke-width="8"/>
+  <text x="955" y="215" text-anchor="middle" font-family="sans-serif" font-size="25" fill="#2675d8">GND</text>
+  <path d="M650 165 l35 -55" stroke="#e33" stroke-width="5"/><polygon points="685,110 672,126 693,130" fill="#e33"/><path d="M690 185 l45 -50" stroke="#e33" stroke-width="5"/><polygon points="735,135 720,150 741,156" fill="#e33"/>
+  <text x="665" y="365" text-anchor="middle" font-family="sans-serif" font-size="23">LED：長腳接陽極（靠近電阻）</text>
+  <rect x="145" y="390" width="910" height="82" rx="14" fill="#fff4d6" stroke="#d9a400" stroke-width="3"/>
+  <text x="600" y="425" text-anchor="middle" font-family="sans-serif" font-size="24">估算電流：I ≈ (5 V − 2 V) ÷ 330 Ω ≈ 9 mA</text>
+  <text x="600" y="457" text-anchor="middle" font-family="sans-serif" font-size="21" fill="#9b271f">LED 不可省略限流電阻；修改接線前先關閉電源輸出。</text>
+</svg>
