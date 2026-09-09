@@ -1477,7 +1477,7 @@ document
         e.target.value;
 
       prepareDisplayOutput();
-
+      updateMeasure();
       draw();
 
     }
@@ -3013,19 +3013,78 @@ function formatCurrent(
 function updateMeasure() {
 
   const info =
-    MODE_INFO[
-      state.mode
-    ];
+    MODE_INFO[state.mode];
 
 
   const diodeDrop =
-    info.type ===
-    "bridge"
-      ?
-      state.vd *
-      2
-      :
-      state.vd;
+    info.type === "bridge"
+      ? state.vd * 2
+      : state.vd;
+
+
+  /*
+    ============================================================
+    CH2 Coupling 對量測值的影響
+    ============================================================
+
+    DC Coupling：
+      顯示實際輸出：
+        Vavg
+        Vmax
+        Vmin
+
+    AC Coupling：
+      顯示：
+        Vac(t) = Vout(t) - Vavg
+
+      因此：
+        Vavg ≈ 0
+        Vmax(ac) = Vmax(dc) - Vavg(dc)
+        Vmin(ac) = Vmin(dc) - Vavg(dc)
+
+      Vpp 不受 DC Offset 影響，因此保持相同。
+  */
+
+  const isAC =
+    state.ch2Coupling === "ac";
+
+
+  const ch2Vavg =
+    isAC
+      ? 0
+      : state.sim.vavg;
+
+
+  const ch2Vmax =
+    isAC
+      ? state.sim.vmax - state.sim.vavg
+      : state.sim.vmax;
+
+
+  const ch2Vmin =
+    isAC
+      ? state.sim.vmin - state.sim.vavg
+      : state.sim.vmin;
+
+
+  /*
+    AC / DC Coupling 都不會改變 Vpp。
+  */
+  const ch2Vpp =
+    state.sim.vripple;
+
+
+  /*
+    CH2 輸出頻率：
+
+    半波：
+        fout = fin
+
+    全波：
+        fout = 2 × fin
+  */
+  const ch2Freq =
+    state.sim.rippleFreq;
 
 
   let html = `
@@ -3039,6 +3098,7 @@ function updateMeasure() {
     <span class="info">
       ${info.name}
     </span>
+
 
     <br><br>
 
@@ -3086,38 +3146,81 @@ function updateMeasure() {
 
     <span class="ch2-c">
       CH2 Vout
+      ${
+        isAC
+          ? "(AC)"
+          : "(DC)"
+      }
     </span>
 
     <br>
 
+    Freq:
+    ${ch2Freq.toFixed(2)} Hz
+
+    <br>
+
     Vavg:
-    ${state.sim.vavg.toFixed(4)} V
+    ${ch2Vavg.toFixed(4)} V
 
     <br>
 
     Vmax:
-    ${state.sim.vmax.toFixed(4)} V
+    ${ch2Vmax.toFixed(4)} V
 
     <br>
 
     Vmin:
-    ${state.sim.vmin.toFixed(4)} V
+    ${ch2Vmin.toFixed(4)} V
 
     <br>
 
     Vpp:
-    ${state.sim.vripple.toFixed(4)} V
-
-    <br>
-
-    Load Iavg:
-    ${formatCurrent(state.sim.loadCurrent)}
+    ${ch2Vpp.toFixed(4)} V
   `;
 
 
-  if (
-    info.filtered
-  ) {
+  /*
+    負載平均電流是「實際電路」的 DC 平均電流，
+    並不因示波器切到 AC Coupling 而改變。
+
+    因此 AC 模式下特別標示 Circuit Iavg，
+    避免學生誤以為這是 AC 波形本身的平均電流。
+  */
+  if (isAC) {
+
+    html += `
+
+      <br>
+
+      Circuit Iavg:
+      ${formatCurrent(state.sim.loadCurrent)}
+
+    `;
+
+  }
+
+  else {
+
+    html += `
+
+      <br>
+
+      Load Iavg:
+      ${formatCurrent(state.sim.loadCurrent)}
+
+    `;
+
+  }
+
+
+  /*
+    ============================================================
+    濾波器資料
+    ============================================================
+  */
+
+  if (info.filtered) {
 
     html += `
 
@@ -3146,8 +3249,7 @@ function updateMeasure() {
           1000 *
           state.c *
           1e-6
-        )
-        .toFixed(5)
+        ).toFixed(5)
       } s
 
       <br>
@@ -3157,8 +3259,7 @@ function updateMeasure() {
         (
           state.sim.vripple *
           1000
-        )
-        .toFixed(2)
+        ).toFixed(2)
       } mV
 
       <br>
@@ -3168,15 +3269,13 @@ function updateMeasure() {
         (
           state.sim.theoreticalRipple *
           1000
-        )
-        .toFixed(2)
+        ).toFixed(2)
       } mV
     `;
 
 
     if (
-      state.sim.rippleError !==
-      null &&
+      state.sim.rippleError !== null &&
       Number.isFinite(
         state.sim.rippleError
       )
@@ -3187,15 +3286,18 @@ function updateMeasure() {
         <br>
 
         Error:
-        ${
-          state.sim.rippleError
-          .toFixed(1)
-        } %
+        ${state.sim.rippleError.toFixed(1)} %
 
       `;
     }
   }
 
+
+  /*
+    ============================================================
+    Coupling 狀態
+    ============================================================
+  */
 
   html += `
 
@@ -3205,12 +3307,9 @@ function updateMeasure() {
 
       CH2:
       ${
-        state.ch2Coupling ===
-        "dc"
-          ?
-          "DC Coupling"
-          :
-          "AC Coupling"
+        isAC
+          ? "AC Coupling"
+          : "DC Coupling"
       }
 
     </span>
@@ -3218,9 +3317,7 @@ function updateMeasure() {
 
 
   document
-    .getElementById(
-      "measure"
-    )
+    .getElementById("measure")
     .innerHTML =
       html;
 }
