@@ -1,0 +1,2248 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>互動式示波器模擬 - 整流與濾波電路</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: #111;
+  color: #ccc;
+  font-family: "Microsoft JhengHei", Arial, sans-serif;
+  display: flex;
+}
+
+/* =========================
+   左側控制面板
+   ========================= */
+#panel {
+  width: 340px;
+  min-width: 340px;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 15px;
+  background: #1a1a1a;
+  border-right: 1px solid #333;
+}
+
+h2 {
+  font-size: 18px;
+  color: #fff;
+  margin: 0 0 15px;
+}
+
+h3 {
+  margin: 18px 0 10px;
+  font-size: 14px;
+  color: #fff;
+  border-bottom: 1px solid #333;
+  padding-bottom: 5px;
+}
+
+.row {
+  margin-bottom: 12px;
+}
+
+.row label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 5px;
+  color: #aaa;
+}
+
+.ctrl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+input[type="number"],
+select {
+  background: #222;
+  color: #fff;
+  border: 1px solid #555;
+  padding: 5px;
+  border-radius: 3px;
+}
+
+input[type="number"] {
+  width: 72px;
+}
+
+select {
+  width: 100%;
+}
+
+input[type="range"] {
+  flex: 1;
+}
+
+input[type="checkbox"] {
+  accent-color: #00bcd4;
+}
+
+.btn {
+  background: #333;
+  color: #ccc;
+  border: 1px solid #555;
+  padding: 4px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.btn:hover {
+  background: #444;
+}
+
+.btn:active {
+  background: #555;
+}
+
+.val {
+  font-size: 12px;
+  color: #aaa;
+  min-width: 55px;
+  text-align: right;
+}
+
+.note {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #777;
+  background: #151515;
+  border: 1px solid #333;
+  padding: 8px;
+  margin-top: 8px;
+}
+
+/* =========================
+   示波器區
+   ========================= */
+#scope {
+  flex: 1;
+  position: relative;
+  background: #000;
+  min-width: 0;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+/* =========================
+   測量視窗
+   ========================= */
+#measure {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  min-width: 220px;
+  background: rgba(0, 0, 0, 0.82);
+  padding: 10px;
+  font-size: 12px;
+  font-family: Consolas, monospace;
+  border: 1px solid #444;
+  line-height: 1.45;
+  pointer-events: none;
+}
+
+.ch1-c {
+  color: #00ffff;
+}
+
+.ch2-c {
+  color: #ffff00;
+}
+
+.rect-c {
+  color: #ff8800;
+}
+
+.good {
+  color: #7CFC00;
+}
+
+.info {
+  color: #aaa;
+}
+
+/* 小螢幕 */
+@media (max-width: 900px) {
+  #panel {
+    width: 300px;
+    min-width: 300px;
+  }
+
+  #measure {
+    font-size: 11px;
+    min-width: 190px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     左側控制面板
+     ========================================================= -->
+<div id="panel">
+
+  <h2>整流與濾波電路模擬器</h2>
+
+  <!-- 整流模式 -->
+  <h3>電路模式</h3>
+
+  <div class="row">
+    <label>整流方式</label>
+    <select id="mode">
+      <option value="half">半波整流</option>
+      <option value="ct_full">中心抽頭式全波整流</option>
+      <option value="bridge_full">橋式全波整流</option>
+      <option value="half_filter">半波整流 + 電容濾波</option>
+      <option value="ct_filter">中心抽頭式全波整流 + 電容濾波</option>
+      <option value="bridge_filter" selected>橋式全波整流 + 電容濾波</option>
+    </select>
+  </div>
+
+  <div id="modeInfo" class="note"></div>
+
+
+  <!-- 輸入訊號 -->
+  <h3>輸入訊號</h3>
+
+  <div class="row">
+    <label>輸入 Vpp (V)</label>
+    <div class="ctrl">
+      <input type="number" id="vpp_in" value="17" min="0.2" max="100" step="0.1">
+      <input type="range" id="vpp_sl" min="0.2" max="30" value="10" step="0.1">
+    </div>
+  </div>
+
+  <div class="row">
+    <label>頻率 (Hz)</label>
+    <div class="ctrl">
+      <input type="number" id="freq_in" value="60" min="1" max="10000" step="1">
+      <input type="range" id="freq_sl" min="10" max="1000" value="60" step="1">
+    </div>
+  </div>
+
+
+  <!-- 電路參數 -->
+  <h3>電路參數</h3>
+
+  <div class="row">
+    <label>二極體順向壓降 Vd (V)</label>
+    <div class="ctrl">
+      <input type="number" id="vd_in" value="0.7" min="0" max="2" step="0.05">
+      <input type="range" id="vd_sl" min="0" max="1.5" value="0.7" step="0.05">
+    </div>
+  </div>
+
+  <div class="row">
+    <label>負載電阻 R (kΩ)</label>
+    <div class="ctrl">
+      <input type="number" id="r_in" value="1" min="0.01" max="100" step="0.1">
+      <input type="range" id="r_sl" min="0.1" max="20" value="1" step="0.1">
+    </div>
+  </div>
+
+  <div class="row" id="capRow">
+    <label>濾波電容 C (µF)</label>
+    <div class="ctrl">
+      <input type="number" id="c_in" value="47" min="0.1" max="100000" step="1">
+      <input type="range" id="c_sl" min="1" max="2000" value="100" step="1">
+    </div>
+  </div>
+
+
+  <!-- 示波器 -->
+  <h3>示波器設定</h3>
+
+  <div class="row">
+    <label>Time / Div (ms)</label>
+    <div class="ctrl">
+      <input type="number" id="tdiv_in" value="5" min="0.05" max="1000" step="0.5">
+      <input type="range" id="tdiv_sl" min="0.5" max="50" value="5" step="0.5">
+    </div>
+  </div>
+
+  <div class="row">
+    <label>CH1 V / Div (V)</label>
+    <div class="ctrl">
+      <input type="number" id="ch1v_in" value="2" min="0.01" max="100" step="0.1">
+      <input type="range" id="ch1v_sl" min="0.1" max="10" value="2" step="0.1">
+    </div>
+  </div>
+
+  <div class="row">
+    <label>CH2 V / Div (V)</label>
+    <div class="ctrl">
+      <input type="number" id="ch2v_in" value="2" min="0.01" max="100" step="0.1">
+      <input type="range" id="ch2v_sl" min="0.1" max="10" value="2" step="0.1">
+    </div>
+  </div>
+
+  <div class="row">
+    <label>CH2 Coupling</label>
+    <select id="ch2Coupling">
+      <option value="dc" selected>DC</option>
+      <option value="ac">AC（只觀察漣波）</option>
+    </select>
+  </div>
+
+
+  <!-- 偏移 -->
+  <h3>垂直偏移</h3>
+
+  <div class="row">
+    <label>CH1</label>
+    <div class="ctrl">
+      <button class="btn" id="ch1_up">▲</button>
+      <button class="btn" id="ch1_dn">▼</button>
+      <button class="btn" id="ch1_zero">0</button>
+      <span id="ch1_off_v" class="val">0.00 V</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <label>CH2</label>
+    <div class="ctrl">
+      <button class="btn" id="ch2_up">▲</button>
+      <button class="btn" id="ch2_dn">▼</button>
+      <button class="btn" id="ch2_zero">0</button>
+      <span id="ch2_off_v" class="val">0.00 V</span>
+    </div>
+  </div>
+
+
+  <!-- 通道 -->
+  <h3>通道顯示</h3>
+
+  <div class="row">
+    <label>
+      <input type="checkbox" id="ch1_en" checked>
+      CH1 輸入正弦波
+    </label>
+  </div>
+
+  <div class="row">
+    <label>
+      <input type="checkbox" id="ch2_en" checked>
+      CH2 負載輸出
+    </label>
+  </div>
+
+  <div class="row">
+    <label>
+      <input type="checkbox" id="rect_en">
+      顯示整流後、濾波前波形
+    </label>
+  </div>
+
+  <div class="row">
+    <label>
+      <input type="checkbox" id="markers_en" checked>
+      顯示 0V 基準線
+    </label>
+  </div>
+
+
+  <h3>操作</h3>
+
+  <div class="note">
+    滑鼠拖曳上半部：移動 CH1<br>
+    滑鼠拖曳下半部：移動 CH2<br>
+    滑鼠滾輪：調整 Time/Div<br><br>
+
+    中心抽頭模式中，設定的 Vpp 為
+    <b>中心抽頭至單端</b>的正弦電壓 Vpp。
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     示波器
+     ========================================================= -->
+<div id="scope">
+
+  <canvas id="cv"></canvas>
+
+  <div id="measure">
+    MEASURE
+  </div>
+
+</div>
+
+
+<script>
+"use strict";
+
+/* ============================================================
+   DOM / Canvas
+   ============================================================ */
+
+const canvas = document.getElementById("cv");
+const ctx = canvas.getContext("2d");
+
+let W = 0;
+let H = 0;
+
+
+/* ============================================================
+   系統狀態
+   ============================================================ */
+
+const state = {
+
+  mode: "bridge_filter",
+
+  // 輸入
+  vpp: 17,
+  freq: 60,
+
+  // 元件
+  vd: 0.7,
+  r: 1,           // kΩ
+  c: 47,         // µF
+
+  // 示波器
+  tDiv: 5,        // ms/div
+  ch1vDiv: 2,
+  ch2vDiv: 2,
+
+  ch1Offset: 0,
+  ch2Offset: 0,
+
+  ch1En: true,
+  ch2En: true,
+  rectEn: false,
+  markersEn: true,
+
+  ch2Coupling: "dc",
+
+  // 滑鼠
+  dragCh: null,
+  dragStartY: 0,
+  dragStartOffset: 0,
+
+  // 模擬陣列
+  timeArr: [],
+  vinArr: [],
+  rectArr: [],
+  outArr: [],
+
+  // 顯示 CH2 陣列
+  displayOutArr: [],
+
+  // 模擬量測
+  sim: {
+    vinVpp: 0,
+    vavg: 0,
+    vmax: 0,
+    vmin: 0,
+    vripple: 0,
+    rippleFreq: 0,
+    loadCurrent: 0,
+    theoreticalRipple: 0,
+    rippleError: null
+  }
+};
+
+
+/* ============================================================
+   模式資料
+   ============================================================ */
+
+const MODE_INFO = {
+
+  half: {
+    name: "半波整流",
+    filtered: false,
+    type: "half"
+  },
+
+  ct_full: {
+    name: "中心抽頭式全波整流",
+    filtered: false,
+    type: "ct"
+  },
+
+  bridge_full: {
+    name: "橋式全波整流",
+    filtered: false,
+    type: "bridge"
+  },
+
+  half_filter: {
+    name: "半波整流 + 電容濾波",
+    filtered: true,
+    type: "half"
+  },
+
+  ct_filter: {
+    name: "中心抽頭式全波整流 + 電容濾波",
+    filtered: true,
+    type: "ct"
+  },
+
+  bridge_filter: {
+    name: "橋式全波整流 + 電容濾波",
+    filtered: true,
+    type: "bridge"
+  }
+
+};
+
+
+/* ============================================================
+   工具函式
+   ============================================================ */
+
+function clamp(v, min, max) {
+  return Math.max(min, Math.min(max, v));
+}
+
+
+function isFilteredMode() {
+  return MODE_INFO[state.mode].filtered;
+}
+
+
+function rectifierType() {
+  return MODE_INFO[state.mode].type;
+}
+
+
+/* ============================================================
+   Resize
+   HiDPI 支援
+   ============================================================ */
+
+function resize() {
+
+  const rect = canvas.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+
+  W = rect.width;
+  H = rect.height;
+
+  canvas.width = Math.round(W * dpr);
+  canvas.height = Math.round(H * dpr);
+
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  draw();
+}
+
+window.addEventListener("resize", resize);
+
+
+/* ============================================================
+   輸入控制綁定
+   ============================================================ */
+
+function bindNumberRange(
+  inputId,
+  sliderId,
+  stateKey,
+  inputMin,
+  inputMax
+) {
+
+  const inp = document.getElementById(inputId);
+  const slider = document.getElementById(sliderId);
+
+  function applyValue(rawValue) {
+
+    let value = parseFloat(rawValue);
+
+    if (!Number.isFinite(value)) {
+      value = inputMin;
+    }
+
+    value = clamp(value, inputMin, inputMax);
+
+    state[stateKey] = value;
+
+    inp.value = value;
+
+    /*
+      若超出 slider 範圍，
+      slider 自己會停在最大 / 最小值，
+      但 number 欄位仍可輸入更大範圍。
+    */
+    slider.value = clamp(
+      value,
+      parseFloat(slider.min),
+      parseFloat(slider.max)
+    );
+
+    recalc();
+  }
+
+  inp.addEventListener("change", () => {
+    applyValue(inp.value);
+  });
+
+  inp.addEventListener("input", () => {
+    const value = parseFloat(inp.value);
+
+    if (Number.isFinite(value)) {
+      state[stateKey] = clamp(value, inputMin, inputMax);
+
+      slider.value = clamp(
+        state[stateKey],
+        parseFloat(slider.min),
+        parseFloat(slider.max)
+      );
+
+      recalc();
+    }
+  });
+
+  slider.addEventListener("input", () => {
+    inp.value = slider.value;
+    applyValue(slider.value);
+  });
+}
+
+
+bindNumberRange(
+  "vpp_in",
+  "vpp_sl",
+  "vpp",
+  0.2,
+  100
+);
+
+bindNumberRange(
+  "freq_in",
+  "freq_sl",
+  "freq",
+  1,
+  10000
+);
+
+bindNumberRange(
+  "vd_in",
+  "vd_sl",
+  "vd",
+  0,
+  2
+);
+
+bindNumberRange(
+  "r_in",
+  "r_sl",
+  "r",
+  0.01,
+  100
+);
+
+bindNumberRange(
+  "c_in",
+  "c_sl",
+  "c",
+  0.1,
+  100000
+);
+
+bindNumberRange(
+  "tdiv_in",
+  "tdiv_sl",
+  "tDiv",
+  0.05,
+  1000
+);
+
+bindNumberRange(
+  "ch1v_in",
+  "ch1v_sl",
+  "ch1vDiv",
+  0.01,
+  100
+);
+
+bindNumberRange(
+  "ch2v_in",
+  "ch2v_sl",
+  "ch2vDiv",
+  0.01,
+  100
+);
+
+
+/* ============================================================
+   模式切換
+   ============================================================ */
+
+document.getElementById("mode").addEventListener("change", e => {
+
+  state.mode = e.target.value;
+
+  updateModeInfo();
+
+  recalc();
+});
+
+
+function updateModeInfo() {
+
+  const info = MODE_INFO[state.mode];
+
+  const capRow = document.getElementById("capRow");
+
+  capRow.style.opacity = info.filtered ? "1" : "0.35";
+
+  let text = "";
+
+  if (info.type === "half") {
+
+    text =
+      `半波整流：正半週導通，負半週截止。<br>` +
+      `導通路徑為 1 顆二極體，因此約損失 1 × Vd。`;
+
+  }
+
+  else if (info.type === "ct") {
+
+    text =
+      `中心抽頭式全波整流：正、負半週分別由不同二極體導通。<br>` +
+      `每次導通路徑為 1 顆二極體，因此約損失 1 × Vd。`;
+
+  }
+
+  else {
+
+    text =
+      `橋式全波整流：每個半週都有兩顆二極體串聯導通。<br>` +
+      `因此輸出約損失 2 × Vd。`;
+
+  }
+
+  if (info.filtered) {
+
+    text +=
+      `<br><br>已接上濾波電容，電容在波峰附近充電，` +
+      `其餘時間透過負載電阻放電。`;
+
+  }
+
+  document.getElementById("modeInfo").innerHTML = text;
+}
+
+
+/* ============================================================
+   Checkbox / Coupling
+   ============================================================ */
+
+document.getElementById("ch1_en").addEventListener("change", e => {
+  state.ch1En = e.target.checked;
+  draw();
+});
+
+document.getElementById("ch2_en").addEventListener("change", e => {
+  state.ch2En = e.target.checked;
+  draw();
+});
+
+document.getElementById("rect_en").addEventListener("change", e => {
+  state.rectEn = e.target.checked;
+  draw();
+});
+
+document.getElementById("markers_en").addEventListener("change", e => {
+  state.markersEn = e.target.checked;
+  draw();
+});
+
+document.getElementById("ch2Coupling").addEventListener("change", e => {
+  state.ch2Coupling = e.target.value;
+  prepareDisplayOutput();
+  draw();
+});
+
+
+/* ============================================================
+   偏移按鈕
+   ============================================================ */
+
+function updateOffsetLabels() {
+
+  document.getElementById("ch1_off_v").textContent =
+    state.ch1Offset.toFixed(2) + " V";
+
+  document.getElementById("ch2_off_v").textContent =
+    state.ch2Offset.toFixed(2) + " V";
+}
+
+
+document.getElementById("ch1_up").onclick = () => {
+
+  state.ch1Offset += state.ch1vDiv * 0.2;
+
+  updateOffsetLabels();
+  draw();
+};
+
+
+document.getElementById("ch1_dn").onclick = () => {
+
+  state.ch1Offset -= state.ch1vDiv * 0.2;
+
+  updateOffsetLabels();
+  draw();
+};
+
+
+document.getElementById("ch1_zero").onclick = () => {
+
+  state.ch1Offset = 0;
+
+  updateOffsetLabels();
+  draw();
+};
+
+
+document.getElementById("ch2_up").onclick = () => {
+
+  state.ch2Offset += state.ch2vDiv * 0.2;
+
+  updateOffsetLabels();
+  draw();
+};
+
+
+document.getElementById("ch2_dn").onclick = () => {
+
+  state.ch2Offset -= state.ch2vDiv * 0.2;
+
+  updateOffsetLabels();
+  draw();
+};
+
+
+document.getElementById("ch2_zero").onclick = () => {
+
+  state.ch2Offset = 0;
+
+  updateOffsetLabels();
+  draw();
+};
+
+
+/* ============================================================
+   整流器數學模型
+   ============================================================ */
+
+/*
+  vin：
+  單一正弦波瞬時值
+
+  半波：
+      max(vin - Vd, 0)
+
+  中心抽頭：
+      abs(vin) - Vd
+
+  橋式：
+      abs(vin) - 2*Vd
+*/
+function calcRectified(vin) {
+
+  const type = rectifierType();
+
+  if (type === "half") {
+
+    return Math.max(
+      vin - state.vd,
+      0
+    );
+
+  }
+
+  if (type === "ct") {
+
+    return Math.max(
+      Math.abs(vin) - state.vd,
+      0
+    );
+
+  }
+
+  // Bridge
+  return Math.max(
+    Math.abs(vin) - 2 * state.vd,
+    0
+  );
+}
+
+
+/* ============================================================
+   核心模擬
+   ============================================================ */
+
+function simulate() {
+
+  const freq = Math.max(state.freq, 0.001);
+
+  const inputPeriod = 1 / freq;
+
+  /*
+    示波器實際顯示時間：
+    10 格 × Time/Div
+  */
+  const displayDuration =
+    state.tDiv * 1e-3 * 10;
+
+  /*
+    為了濾波模式進入穩態，
+    先額外模擬多個週期。
+  */
+  const warmupCycles = isFilteredMode() ? 30 : 3;
+
+  const warmupDuration =
+    warmupCycles * inputPeriod;
+
+  const totalDuration =
+    warmupDuration + displayDuration;
+
+  /*
+    每輸入週期至少取 500 點。
+
+    同時希望畫面約 5000 點左右。
+
+    再限制總點數避免瀏覽器負擔太大。
+  */
+  let dtByFrequency =
+    inputPeriod / 500;
+
+  let dtByDisplay =
+    displayDuration / 5000;
+
+  let dt =
+    Math.min(dtByFrequency, dtByDisplay);
+
+  /*
+    避免 dt 太小造成上百萬點
+  */
+  const maxTotalPoints = 150000;
+
+  if (totalDuration / dt > maxTotalPoints) {
+    dt = totalDuration / maxTotalPoints;
+  }
+
+  /*
+    避免數值例外
+  */
+  dt = Math.max(dt, 1e-8);
+
+
+  const R =
+    Math.max(state.r, 0.000001) * 1000;
+
+  const C =
+    Math.max(state.c, 0.000001) * 1e-6;
+
+  const tau =
+    R * C;
+
+
+  let vcap = 0;
+
+
+  const visibleTime = [];
+  const visibleVin = [];
+  const visibleRect = [];
+  const visibleOut = [];
+
+
+  const totalPoints =
+    Math.ceil(totalDuration / dt);
+
+
+  for (let i = 0; i <= totalPoints; i++) {
+
+    const t =
+      i * dt;
+
+    /*
+      輸入正弦波
+
+      Vpp -> Vpeak = Vpp / 2
+    */
+    const vin =
+      (state.vpp / 2) *
+      Math.sin(
+        2 * Math.PI * freq * t
+      );
+
+
+    const vrect =
+      calcRectified(vin);
+
+
+    let vout;
+
+
+    if (isFilteredMode()) {
+
+      /*
+        簡化電容濾波模型：
+
+        當整流波電壓 > 電容電壓
+        -> 二極體導通
+        -> 電容迅速充至整流電壓
+
+        否則
+        -> 二極體截止
+        -> 電容經 R 放電
+
+        使用 RC 精確指數式：
+        V(t+dt) = V(t) exp(-dt/RC)
+      */
+      if (vrect >= vcap) {
+
+        vcap = vrect;
+
+      }
+
+      else {
+
+        if (tau > 0) {
+
+          vcap *= Math.exp(
+            -dt / tau
+          );
+
+        }
+
+        else {
+
+          vcap = 0;
+
+        }
+
+      }
+
+      vout = vcap;
+
+    }
+
+    else {
+
+      /*
+        無濾波模式：
+        負載端輸出就是整流後波形
+      */
+      vout = vrect;
+
+    }
+
+
+    /*
+      warm-up 階段不畫，
+      只留下真正顯示時間。
+    */
+    if (t >= warmupDuration) {
+
+      const displayT =
+        t - warmupDuration;
+
+      if (displayT <= displayDuration) {
+
+        visibleTime.push(displayT);
+        visibleVin.push(vin);
+        visibleRect.push(vrect);
+        visibleOut.push(vout);
+
+      }
+    }
+  }
+
+
+  state.timeArr = visibleTime;
+  state.vinArr = visibleVin;
+  state.rectArr = visibleRect;
+  state.outArr = visibleOut;
+
+  calculateMeasurements();
+
+  prepareDisplayOutput();
+}
+
+
+/* ============================================================
+   量測
+   ============================================================ */
+
+function calculateMeasurements() {
+
+  const vin = state.vinArr;
+  const out = state.outArr;
+
+  if (!out.length) {
+    return;
+  }
+
+
+  /* CH1 Vpp */
+
+  let vinMax = -Infinity;
+  let vinMin = Infinity;
+
+  for (const v of vin) {
+
+    if (v > vinMax) vinMax = v;
+    if (v < vinMin) vinMin = v;
+
+  }
+
+  state.sim.vinVpp =
+    vinMax - vinMin;
+
+
+  /*
+    輸出穩態量測
+
+    為避免畫面寬度不是整數週期造成偏差，
+    優先取最後數個 ripple 週期。
+  */
+  const rippleFreq =
+    rectifierType() === "half"
+      ? state.freq
+      : state.freq * 2;
+
+  state.sim.rippleFreq =
+    rippleFreq;
+
+
+  const ripplePeriod =
+    1 / rippleFreq;
+
+  const displayDuration =
+    state.tDiv * 1e-3 * 10;
+
+  const measureDuration =
+    Math.min(
+      displayDuration,
+      ripplePeriod * 5
+    );
+
+  const startTime =
+    Math.max(
+      0,
+      displayDuration - measureDuration
+    );
+
+
+  let sum = 0;
+  let count = 0;
+  let vmax = -Infinity;
+  let vmin = Infinity;
+
+
+  for (let i = 0; i < out.length; i++) {
+
+    if (state.timeArr[i] >= startTime) {
+
+      const v = out[i];
+
+      sum += v;
+      count++;
+
+      if (v > vmax) vmax = v;
+      if (v < vmin) vmin = v;
+
+    }
+  }
+
+
+  if (count === 0) {
+    return;
+  }
+
+
+  const vavg =
+    sum / count;
+
+  const vripple =
+    vmax - vmin;
+
+
+  state.sim.vavg =
+    vavg;
+
+  state.sim.vmax =
+    vmax;
+
+  state.sim.vmin =
+    vmin;
+
+  state.sim.vripple =
+    vripple;
+
+
+  /*
+    負載平均電流
+  */
+  const R =
+    state.r * 1000;
+
+  const loadCurrent =
+    R > 0
+      ? vavg / R
+      : 0;
+
+  state.sim.loadCurrent =
+    loadCurrent;
+
+
+  /*
+    常用近似漣波公式：
+
+    Vr(pp) ≈ Iload / (fripple × C)
+
+    僅濾波模式有意義
+  */
+  if (isFilteredMode()) {
+
+    const C =
+      state.c * 1e-6;
+
+    const theoreticalRipple =
+      rippleFreq > 0 && C > 0
+        ? loadCurrent /
+          (rippleFreq * C)
+        : 0;
+
+
+    state.sim.theoreticalRipple =
+      theoreticalRipple;
+
+
+    if (theoreticalRipple > 1e-12) {
+
+      state.sim.rippleError =
+        Math.abs(
+          vripple -
+          theoreticalRipple
+        )
+        /
+        theoreticalRipple
+        *
+        100;
+
+    }
+
+    else {
+
+      state.sim.rippleError =
+        null;
+
+    }
+
+  }
+
+  else {
+
+    state.sim.theoreticalRipple = 0;
+    state.sim.rippleError = null;
+
+  }
+}
+
+
+/* ============================================================
+   CH2 AC / DC Coupling
+   ============================================================ */
+
+function prepareDisplayOutput() {
+
+  if (state.ch2Coupling === "dc") {
+
+    state.displayOutArr =
+      [...state.outArr];
+
+    return;
+  }
+
+
+  /*
+    AC coupling：
+    移除 DC 平均值
+  */
+  const avg =
+    state.sim.vavg;
+
+  state.displayOutArr =
+    state.outArr.map(
+      v => v - avg
+    );
+}
+
+
+/* ============================================================
+   座標轉換
+   ============================================================ */
+
+function scaleY(
+  value,
+  voltsPerDiv,
+  offset
+) {
+
+  /*
+    示波器垂直方向：
+    共 10 大格
+  */
+  const pixelsPerDiv =
+    H / 10;
+
+  return (
+    H / 2
+    -
+    (value + offset)
+    / voltsPerDiv
+    * pixelsPerDiv
+  );
+}
+
+
+function timeToX(t) {
+
+  const totalTime =
+    state.tDiv * 1e-3 * 10;
+
+  return (
+    t /
+    totalTime
+    *
+    W
+  );
+}
+
+
+/* ============================================================
+   示波器格線
+   ============================================================ */
+
+function drawGrid() {
+
+  ctx.clearRect(
+    0,
+    0,
+    W,
+    H
+  );
+
+  ctx.fillStyle =
+    "#000";
+
+  ctx.fillRect(
+    0,
+    0,
+    W,
+    H
+  );
+
+
+  /*
+    次格線：
+    每大格 5 小格
+    10 × 10 大格
+  */
+  ctx.lineWidth = 1;
+
+  for (let i = 0; i <= 50; i++) {
+
+    const x =
+      i * W / 50;
+
+    const y =
+      i * H / 50;
+
+    const major =
+      i % 5 === 0;
+
+    ctx.strokeStyle =
+      major
+        ? "#2c2c2c"
+        : "#151515";
+
+
+    // 垂直
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, H);
+    ctx.stroke();
+
+
+    // 水平
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(W, y);
+    ctx.stroke();
+  }
+
+
+  /*
+    中心軸
+  */
+  ctx.strokeStyle =
+    "#555";
+
+  ctx.lineWidth = 1;
+
+
+  ctx.beginPath();
+  ctx.moveTo(
+    W / 2,
+    0
+  );
+  ctx.lineTo(
+    W / 2,
+    H
+  );
+  ctx.stroke();
+
+
+  ctx.beginPath();
+  ctx.moveTo(
+    0,
+    H / 2
+  );
+  ctx.lineTo(
+    W,
+    H / 2
+  );
+  ctx.stroke();
+}
+
+
+/* ============================================================
+   0V marker
+   ============================================================ */
+
+function drawZeroMarkers() {
+
+  if (!state.markersEn) {
+    return;
+  }
+
+
+  const y1 =
+    scaleY(
+      0,
+      state.ch1vDiv,
+      state.ch1Offset
+    );
+
+
+  const y2 =
+    scaleY(
+      0,
+      state.ch2vDiv,
+      state.ch2Offset
+    );
+
+
+  ctx.font =
+    "12px Consolas";
+
+
+  if (state.ch1En) {
+
+    ctx.fillStyle =
+      "#00ffff";
+
+    ctx.fillText(
+      "1▶ 0V",
+      5,
+      clamp(y1 - 4, 12, H - 10)
+    );
+
+  }
+
+
+  if (state.ch2En) {
+
+    ctx.fillStyle =
+      "#ffff00";
+
+    ctx.fillText(
+      "2▶ 0V",
+      5,
+      clamp(y2 + 14, 12, H - 10)
+    );
+
+  }
+}
+
+
+/* ============================================================
+   畫波形
+   ============================================================ */
+
+function drawWave(
+  arr,
+  color,
+  vDiv,
+  offset,
+  alpha = 1
+) {
+
+  if (
+    !arr ||
+    arr.length < 2
+  ) {
+    return;
+  }
+
+
+  ctx.strokeStyle =
+    color;
+
+  ctx.lineWidth =
+    1.6;
+
+  ctx.globalAlpha =
+    alpha;
+
+  ctx.beginPath();
+
+
+  let started =
+    false;
+
+
+  for (
+    let i = 0;
+    i < arr.length;
+    i++
+  ) {
+
+    const x =
+      timeToX(
+        state.timeArr[i]
+      );
+
+    const y =
+      scaleY(
+        arr[i],
+        vDiv,
+        offset
+      );
+
+
+    /*
+      超出畫面不用畫
+    */
+    if (
+      x < 0 ||
+      x > W
+    ) {
+      continue;
+    }
+
+
+    if (!started) {
+
+      ctx.moveTo(
+        x,
+        y
+      );
+
+      started = true;
+
+    }
+
+    else {
+
+      ctx.lineTo(
+        x,
+        y
+      );
+
+    }
+  }
+
+
+  ctx.stroke();
+
+  ctx.globalAlpha = 1;
+}
+
+
+/* ============================================================
+   示波器畫面
+   ============================================================ */
+
+function draw() {
+
+  if (
+    W <= 0 ||
+    H <= 0
+  ) {
+    return;
+  }
+
+
+  drawGrid();
+
+
+  /*
+    橘色：
+    整流後 / 濾波前
+  */
+  if (state.rectEn) {
+
+    drawWave(
+      state.rectArr,
+      "#ff8800",
+      state.ch2vDiv,
+      state.ch2Offset,
+      0.65
+    );
+
+  }
+
+
+  /*
+    CH1
+  */
+  if (state.ch1En) {
+
+    drawWave(
+      state.vinArr,
+      "#00ffff",
+      state.ch1vDiv,
+      state.ch1Offset,
+      1
+    );
+
+  }
+
+
+  /*
+    CH2
+  */
+  if (state.ch2En) {
+
+    drawWave(
+      state.displayOutArr,
+      "#ffff00",
+      state.ch2vDiv,
+      state.ch2Offset,
+      1
+    );
+
+  }
+
+
+  drawZeroMarkers();
+
+
+  /*
+    左上圖例
+  */
+  ctx.font =
+    "12px Consolas";
+
+  let y = 20;
+
+
+  if (state.ch1En) {
+
+    ctx.fillStyle =
+      "#00ffff";
+
+    ctx.fillText(
+      "CH1  Vin",
+      10,
+      y
+    );
+
+    y += 16;
+  }
+
+
+  if (state.ch2En) {
+
+    ctx.fillStyle =
+      "#ffff00";
+
+    ctx.fillText(
+      "CH2  Vout " +
+      (
+        state.ch2Coupling === "ac"
+          ? "(AC Coupling)"
+          : "(DC Coupling)"
+      ),
+      10,
+      y
+    );
+
+    y += 16;
+  }
+
+
+  if (state.rectEn) {
+
+    ctx.fillStyle =
+      "#ff8800";
+
+    ctx.fillText(
+      "RECT 整流後 / 濾波前",
+      10,
+      y
+    );
+
+  }
+
+
+  /*
+    下方狀態列
+  */
+  ctx.fillStyle =
+    "#999";
+
+  ctx.font =
+    "12px Consolas";
+
+  const status =
+    `${MODE_INFO[state.mode].name}` +
+    ` | Time/Div ${formatTimeDiv(state.tDiv)}` +
+    ` | CH1 ${formatVoltage(state.ch1vDiv)}/Div` +
+    ` | CH2 ${formatVoltage(state.ch2vDiv)}/Div`;
+
+
+  ctx.fillText(
+    status,
+    10,
+    H - 14
+  );
+}
+
+
+/* ============================================================
+   顯示格式
+   ============================================================ */
+
+function formatVoltage(v) {
+
+  if (Math.abs(v) < 1) {
+
+    return (
+      (v * 1000).toFixed(0) +
+      "mV"
+    );
+
+  }
+
+  return (
+    v.toFixed(2) +
+    "V"
+  );
+}
+
+
+function formatTimeDiv(ms) {
+
+  if (ms < 1) {
+
+    return (
+      (ms * 1000).toFixed(0) +
+      "µs"
+    );
+
+  }
+
+  return (
+    ms.toFixed(2) +
+    "ms"
+  );
+}
+
+
+function formatCurrent(A) {
+
+  if (
+    Math.abs(A) >= 1
+  ) {
+
+    return (
+      A.toFixed(3) +
+      " A"
+    );
+
+  }
+
+
+  if (
+    Math.abs(A) >= 0.001
+  ) {
+
+    return (
+      (A * 1000).toFixed(3) +
+      " mA"
+    );
+
+  }
+
+
+  return (
+    (A * 1e6).toFixed(2) +
+    " µA"
+  );
+}
+
+
+/* ============================================================
+   測量資訊
+   ============================================================ */
+
+function updateMeasure() {
+
+  const info =
+    MODE_INFO[state.mode];
+
+  const diodeDrop =
+    info.type === "bridge"
+      ? state.vd * 2
+      : state.vd;
+
+
+  let html = `
+
+    <b>MEASURE</b><br>
+
+    <span class="info">
+    ${info.name}
+    </span>
+
+    <br><br>
+
+    <span class="ch1-c">
+    CH1 Vin
+    </span><br>
+
+    Vpp:
+    ${state.vpp.toFixed(3)} V
+    <br>
+
+    Vpeak:
+    ${(state.vpp / 2).toFixed(3)} V
+    <br>
+
+    Freq:
+    ${state.freq.toFixed(2)} Hz
+
+    <br><br>
+
+    <span class="rect-c">
+    Rectifier
+    </span><br>
+
+    Diode drop:
+    ${diodeDrop.toFixed(3)} V
+    <br>
+
+    Ripple Freq:
+    ${state.sim.rippleFreq.toFixed(2)} Hz
+
+    <br><br>
+
+    <span class="ch2-c">
+    CH2 Vout
+    </span><br>
+
+    Vavg:
+    ${state.sim.vavg.toFixed(4)} V
+    <br>
+
+    Vmax:
+    ${state.sim.vmax.toFixed(4)} V
+    <br>
+
+    Vmin:
+    ${state.sim.vmin.toFixed(4)} V
+    <br>
+
+    Vpp:
+    ${state.sim.vripple.toFixed(4)} V
+    <br>
+
+    Load Iavg:
+    ${formatCurrent(state.sim.loadCurrent)}
+  `;
+
+
+  if (info.filtered) {
+
+    html += `
+
+      <br><br>
+
+      <span class="good">
+      FILTER
+      </span><br>
+
+      R:
+      ${state.r.toFixed(3)} kΩ
+      <br>
+
+      C:
+      ${state.c.toFixed(2)} µF
+      <br>
+
+      RC:
+      ${(state.r * 1000 * state.c * 1e-6).toFixed(5)} s
+      <br>
+
+      Vripple(sim):
+      ${(state.sim.vripple * 1000).toFixed(2)} mV
+      <br>
+
+      Vripple(calc):
+      ${(state.sim.theoreticalRipple * 1000).toFixed(2)} mV
+    `;
+
+
+    if (
+      state.sim.rippleError !== null &&
+      Number.isFinite(state.sim.rippleError)
+    ) {
+
+      html += `
+        <br>
+        Error:
+        ${state.sim.rippleError.toFixed(1)} %
+      `;
+
+    }
+  }
+
+
+  html += `
+
+    <br><br>
+
+    <span class="info">
+    CH2:
+    ${
+      state.ch2Coupling === "dc"
+        ? "DC Coupling"
+        : "AC Coupling"
+    }
+    </span>
+  `;
+
+
+  document.getElementById("measure").innerHTML =
+    html;
+}
+
+
+/* ============================================================
+   重新模擬
+   ============================================================ */
+
+function recalc() {
+
+  simulate();
+  updateMeasure();
+  draw();
+}
+
+
+/* ============================================================
+   滑鼠拖曳波形
+   ============================================================ */
+
+canvas.addEventListener(
+  "mousedown",
+  e => {
+
+    const rect =
+      canvas.getBoundingClientRect();
+
+    const y =
+      e.clientY - rect.top;
+
+
+    /*
+      上半部移 CH1
+      下半部移 CH2
+    */
+    state.dragCh =
+      y < H / 2
+        ? "ch1"
+        : "ch2";
+
+
+    state.dragStartY =
+      y;
+
+
+    state.dragStartOffset =
+      state.dragCh === "ch1"
+        ? state.ch1Offset
+        : state.ch2Offset;
+
+
+    canvas.style.cursor =
+      "grabbing";
+  }
+);
+
+
+canvas.addEventListener(
+  "mousemove",
+  e => {
+
+    if (!state.dragCh) {
+      return;
+    }
+
+
+    const rect =
+      canvas.getBoundingClientRect();
+
+    const y =
+      e.clientY - rect.top;
+
+
+    const deltaY =
+      state.dragStartY - y;
+
+
+    const vDiv =
+      state.dragCh === "ch1"
+        ? state.ch1vDiv
+        : state.ch2vDiv;
+
+
+    const deltaV =
+      deltaY /
+      (H / 10)
+      *
+      vDiv;
+
+
+    const newOffset =
+      state.dragStartOffset +
+      deltaV;
+
+
+    if (
+      state.dragCh === "ch1"
+    ) {
+
+      state.ch1Offset =
+        newOffset;
+
+    }
+
+    else {
+
+      state.ch2Offset =
+        newOffset;
+
+    }
+
+
+    updateOffsetLabels();
+    draw();
+  }
+);
+
+
+function stopDrag() {
+
+  state.dragCh = null;
+  canvas.style.cursor = "grab";
+}
+
+
+canvas.addEventListener(
+  "mouseup",
+  stopDrag
+);
+
+canvas.addEventListener(
+  "mouseleave",
+  stopDrag
+);
+
+
+/* ============================================================
+   滾輪 Time/Div
+   採近似 1-2-5 示波器刻度
+   ============================================================ */
+
+const TIME_DIV_VALUES = [
+
+  0.05,
+  0.1,
+  0.2,
+  0.5,
+
+  1,
+  2,
+  5,
+
+  10,
+  20,
+  50,
+
+  100,
+  200,
+  500,
+
+  1000
+];
+
+
+function closestTimeIndex(value) {
+
+  let bestIndex = 0;
+  let bestDiff = Infinity;
+
+  for (
+    let i = 0;
+    i < TIME_DIV_VALUES.length;
+    i++
+  ) {
+
+    const diff =
+      Math.abs(
+        TIME_DIV_VALUES[i] -
+        value
+      );
+
+    if (
+      diff < bestDiff
+    ) {
+
+      bestDiff = diff;
+      bestIndex = i;
+
+    }
+  }
+
+  return bestIndex;
+}
+
+
+canvas.addEventListener(
+  "wheel",
+  e => {
+
+    e.preventDefault();
+
+    let index =
+      closestTimeIndex(
+        state.tDiv
+      );
+
+
+    if (
+      e.deltaY < 0
+    ) {
+
+      index--;
+
+    }
+
+    else {
+
+      index++;
+
+    }
+
+
+    index =
+      clamp(
+        index,
+        0,
+        TIME_DIV_VALUES.length - 1
+      );
+
+
+    state.tDiv =
+      TIME_DIV_VALUES[index];
+
+
+    document.getElementById(
+      "tdiv_in"
+    ).value =
+      state.tDiv;
+
+
+    document.getElementById(
+      "tdiv_sl"
+    ).value =
+      clamp(
+        state.tDiv,
+        parseFloat(
+          document.getElementById(
+            "tdiv_sl"
+          ).min
+        ),
+        parseFloat(
+          document.getElementById(
+            "tdiv_sl"
+          ).max
+        )
+      );
+
+
+    recalc();
+
+  },
+  {
+    passive: false
+  }
+);
+
+
+/* ============================================================
+   初始化
+   ============================================================ */
+
+function init() {
+
+  updateModeInfo();
+
+  updateOffsetLabels();
+
+  resize();
+
+  recalc();
+}
+
+
+init();
+
+</script>
+
+</body>
+</html>
