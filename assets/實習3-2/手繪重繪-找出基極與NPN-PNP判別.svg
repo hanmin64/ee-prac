@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" font-family="'Microsoft JhengHei','Noto Sans TC','PingFang TC',sans-serif">
+  <rect width="960" height="620" fill="#ffffff"/>
+  <text x="480" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#1a3a6b">實習 3-2　NPN 及 PNP 之判別——找出基極</text>
+  <text x="480" y="62" text-anchor="middle" font-size="13" fill="#666666">隨堂作業筆記重繪　｜　指針電表 R×1 kΩ（先短接兩棒做 0 Ω 調整）</text>
+  <line x1="40" y1="74" x2="920" y2="74" stroke="#2b6cb0" stroke-width="2"/>
+
+  <rect x="30" y="92" width="430" height="28" fill="#d6e8f7"/>
+  <text x="42" y="112" font-size="16" font-weight="bold" fill="#1a3a6b">章節與儀表設定</text>
+  <text x="42" y="146" font-size="14" fill="#1a3a6b">Ch 3-2　NPN 及 PNP 判別：找到 B，但 C、E 待定</text>
+  <text x="42" y="173" font-size="14" fill="#1a3a6b">Ch 3-3　E、B、C 接腳判別：主要目的，找到 E、C</text>
+  <text x="42" y="200" font-size="14" fill="#1a3a6b">Ch 3-4　h<tspan dy="4" font-size="10">FE</tspan><tspan dy="-4">（β）測量</tspan></text>
+  <text x="42" y="227" font-size="14" fill="#1a3a6b">儀表：指針電表 R×1 kΩ 檔（0 Ω 調整）</text>
+
+  <rect x="30" y="250" width="430" height="28" fill="#d6e8f7"/>
+  <text x="42" y="270" font-size="16" font-weight="bold" fill="#1a3a6b">判別步驟</text>
+  <text x="42" y="304" font-size="14" fill="#1a3a6b">① 若 PN 接面會偏轉，則黑棒 → P，紅棒 → N</text>
+  <text x="42" y="333" font-size="14" fill="#1a3a6b">② 找到 2P、1N → <tspan fill="#b8322c" font-weight="bold">PNP</tspan>；找到 2N、1P → <tspan fill="#b8322c" font-weight="bold">NPN</tspan></text>
+
+  <rect x="30" y="388" width="430" height="118" rx="6" fill="#f0f7ff" stroke="#2b6cb0" stroke-width="1"/>
+  <text x="42" y="414" font-size="14" font-weight="bold" fill="#1a3a6b">儀表極性（依手稿）</text>
+  <text x="42" y="441" font-size="13.5" fill="#1a3a6b">指針電表電阻檔：黑棒 ⊕（內部電池正端）、紅棒 ⊖（負端）</text>
+  <text x="42" y="467" font-size="13.5" fill="#1a3a6b">偏轉＝PN 接面順向導通（低電阻）</text>
+  <text x="42" y="493" font-size="13.5" fill="#b8322c">偏轉大小只作相對判斷，不能當成精確 h<tspan dy="3.5" font-size="9.5">FE</tspan><tspan dy="-3.5">。</tspan></text>
+
+  <line x1="467" y1="100" x2="467" y2="520" stroke="#cccccc" stroke-width="1"/>
+
+  <rect x="484" y="92" width="446" height="28" fill="#d6e8f7"/>
+  <text x="496" y="112" font-size="16" font-weight="bold" fill="#1a3a6b">電晶體接腳圖（腳號由左至右 1、2、3）</text>
+
+  <g>
+    <path d="M 513,182 A 42,42 0 0 1 597,182 L 597,232 L 513,232 Z" fill="#ffffff" stroke="#1a3a6b" stroke-width="2"/>
+    <line x1="527" y1="232" x2="527" y2="274" stroke="#1a3a6b" stroke-width="2"/>
+    <line x1="555" y1="232" x2="555" y2="274" stroke="#1a3a6b" stroke-width="2"/>
+    <line x1="583" y1="232" x2="583" y2="274" stroke="#1a3a6b" stroke-width="2"/>
+    <text x="527" y="294" text-anchor="middle" font-size="14" fill="#1a3a6b">1</text>
+    <text x="555" y="294" text-anchor="middle" font-size="14" fill="#1a3a6b">2</text>
+    <text x="583" y="294" text-anchor="middle" font-size="14" fill="#1a3a6b">3</text>
+    <text x="527" y="318" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a3a6b">E</text>
+    <text x="555" y="318" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a3a6b">C</text>
+    <text x="583" y="318" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a3a6b">B</text>
+    <text x="527" y="338" text-anchor="middle" font-size="12" fill="#888888">N</text>
+    <text x="555" y="338" text-anchor="middle" font-size="12" fill="#888888">N</text>
+    <text x="583" y="338" text-anchor="middle" font-size="12" fill="#888888">P</text>
+    <text x="555" y="366" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a3a6b">2SC945</text>
+    <text x="555" y="390" text-anchor="middle" font-size="14" font-weight="bold" fill="#b8322c">NPN</text>
+  </g>
+
+  <g>
+    <path d="M 663,182 A 42,42 0 0 1 747,182 L 747,232 L 663,232 Z" fill="#ffffff" stroke="#1a3a6b" stroke-width="2"/>
+    <line x1="677" y1="232" x2="677" y2="274" stroke="#1a3a6b" stroke-width="2"/>
+    <line x1="705" y1="232" x2="705" y2="274" stroke="#1a3a6b" stroke-width="2"/>
+    <line x1="733" y1="232" x2="733" y2="274" stroke="#1a3a6b" stroke-width="2"/>
+    <text x="677" y="294" text-anchor="middle" font-size="14" fill="#1a3a6b">1</text>
+    <text x="705" y="294" text-anchor="middle" font-size="14" fill="#1a3a6b">2</text>
+    <text x="733" y="294" text-anchor="middle" font-size="14" fill="#1a3a6b">3</text>
+    <text x="677" y="318" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a3a6b">E</text>
+    <text x="705" y="318" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a3a6b">C</text>
+    <text x="733" y="318" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a3a6b">B</text>
+    <text x="677" y="338" text-anchor="middle" font-size="12" fill="#888888">P</text>
+    <text x="705" y="338" text-anchor="middle" font-size="12" fill="#888888">P</text>
+    <text x="733" y="338" text-anchor="middle" font-size="12" fill="#888888">N</text>
+    <text x="705" y="366" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a3a6b">2SA733</text>
+    <text x="705" y="390" text-anchor="middle" font-size="14" font-weight="bold" fill="#b8322c">PNP</text>
+  </g>
+
+  <g>
+    <path d="M 813,182 A 42,42 0 0 1 897,182 L 897,232 L 813,232 Z" fill="#ffffff" stroke="#1a3a6b" stroke-width="2"/>
+    <line x1="827" y1="232" x2="827" y2="274" stroke="#1a3a6b" stroke-width="2"/>
+    <line x1="855" y1="232" x2="855" y2="274" stroke="#1a3a6b" stroke-width="2"/>
+    <line x1="883" y1="232" x2="883" y2="274" stroke="#1a3a6b" stroke-width="2"/>
+    <text x="827" y="294" text-anchor="middle" font-size="14" fill="#1a3a6b">1</text>
+    <text x="855" y="294" text-anchor="middle" font-size="14" fill="#1a3a6b">2</text>
+    <text x="883" y="294" text-anchor="middle" font-size="14" fill="#1a3a6b">3</text>
+    <text x="827" y="318" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a3a6b">E</text>
+    <text x="855" y="318" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a3a6b">B</text>
+    <text x="883" y="318" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a3a6b">C</text>
+    <text x="827" y="338" text-anchor="middle" font-size="12" fill="#888888">N</text>
+    <text x="855" y="338" text-anchor="middle" font-size="12" fill="#888888">P</text>
+    <text x="883" y="338" text-anchor="middle" font-size="12" fill="#888888">N</text>
+    <text x="855" y="366" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a3a6b">2N2222</text>
+    <text x="855" y="390" text-anchor="middle" font-size="14" font-weight="bold" fill="#b8322c">NPN</text>
+  </g>
+
+  <line x1="40" y1="540" x2="920" y2="540" stroke="#cccccc" stroke-width="1"/>
+  <text x="40" y="566" font-size="12.5" fill="#888888">依手繪隨堂作業筆記忠實重繪</text>
+  <text x="920" y="566" text-anchor="end" font-size="12.5" fill="#666666" fill-opacity="0.75">大安高工控制科張漢民</text>
+</svg>

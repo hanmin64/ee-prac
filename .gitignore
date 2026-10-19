@@ -1,1 +1,6 @@
 desktop.ini
+**/原始檔備份/
+tmp/
+*.bak
+*.bak.md
+

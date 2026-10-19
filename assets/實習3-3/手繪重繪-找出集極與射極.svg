@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 680" font-family="'Microsoft JhengHei','Noto Sans TC','PingFang TC',sans-serif">
+  <rect width="1000" height="680" fill="#ffffff"/>
+  <text x="500" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#1a3a6b">實習 3-3　E、B、C 接腳判別——找出集極與射極</text>
+  <text x="500" y="62" text-anchor="middle" font-size="13" fill="#666666">隨堂作業筆記重繪　｜　指針電表 R×1 kΩ　｜　手指當作電阻，接於 B、C 之間</text>
+  <line x1="40" y1="74" x2="960" y2="74" stroke="#2b6cb0" stroke-width="2"/>
+
+  <rect x="30" y="92" width="460" height="30" fill="#d6e8f7"/>
+  <text x="260" y="113" text-anchor="middle" font-size="17" font-weight="bold" fill="#1a3a6b">NPN 電晶體</text>
+
+  <circle cx="130" cy="225" r="46" fill="#ffffff" stroke="#1a3a6b" stroke-width="2"/>
+  <path d="M 102,209 A 32,32 0 0 1 158,209" fill="none" stroke="#1a3a6b" stroke-width="1.2"/>
+  <line x1="130" y1="225" x2="155" y2="196" stroke="#1a3a6b" stroke-width="2"/>
+  <polygon points="155,196 146,199 152,205" fill="#1a3a6b"/>
+  <text x="130" y="292" text-anchor="middle" font-size="13" fill="#1a3a6b">指針電表</text>
+  <text x="130" y="311" text-anchor="middle" font-size="13" fill="#1a3a6b">R×1 kΩ</text>
+
+  <path d="M 166,196 L 240,126 L 396,126" fill="none" stroke="#111111" stroke-width="2.5"/>
+  <text x="300" y="118" text-anchor="middle" font-size="14" font-weight="bold" fill="#111111">⊕ 黑棒</text>
+  <path d="M 166,254 L 240,322 L 396,322" fill="none" stroke="#b8322c" stroke-width="2.5"/>
+  <text x="300" y="342" text-anchor="middle" font-size="14" font-weight="bold" fill="#b8322c">⊖ 紅棒</text>
+
+  <circle cx="370" cy="225" r="52" fill="#ffffff" stroke="#1a3a6b" stroke-width="2"/>
+  <line x1="350" y1="185" x2="350" y2="265" stroke="#1a3a6b" stroke-width="3"/>
+  <line x1="270" y1="225" x2="350" y2="225" stroke="#1a3a6b" stroke-width="2"/>
+  <text x="260" y="230" text-anchor="end" font-size="15" font-weight="bold" fill="#1a3a6b">B</text>
+  <line x1="350" y1="207" x2="396" y2="173" stroke="#1a3a6b" stroke-width="2"/>
+  <line x1="396" y1="173" x2="396" y2="126" stroke="#1a3a6b" stroke-width="2"/>
+  <line x1="350" y1="243" x2="396" y2="277" stroke="#1a3a6b" stroke-width="2"/>
+  <line x1="396" y1="277" x2="396" y2="322" stroke="#1a3a6b" stroke-width="2"/>
+  <polygon points="381,266 372,265 378,257" fill="#1a3a6b"/>
+  <text x="412" y="143" font-size="15" font-weight="bold" fill="#1a3a6b">C</text>
+  <text x="412" y="296" font-size="15" font-weight="bold" fill="#1a3a6b">E</text>
+
+  <path d="M 270,225 L 270,150 L 308,150" fill="none" stroke="#1a3a6b" stroke-width="2"/>
+  <rect x="308" y="140" width="40" height="20" rx="4" fill="#ffffff" stroke="#1a3a6b" stroke-width="1.5"/>
+  <path d="M 312,150 q 4.5,-7 9,0 t 9,0 t 9,0 t 9,0" fill="none" stroke="#1a3a6b" stroke-width="1.5"/>
+  <path d="M 348,150 L 396,150" fill="none" stroke="#1a3a6b" stroke-width="2"/>
+  <circle cx="396" cy="150" r="3.5" fill="#1a3a6b"/>
+  <circle cx="396" cy="126" r="3.5" fill="#111111"/>
+  <circle cx="396" cy="322" r="3.5" fill="#b8322c"/>
+  <text x="328" y="178" text-anchor="middle" font-size="13" fill="#1a3a6b">手指（人體電阻）</text>
+
+  <polygon points="306,225 296,220 296,230" fill="#1f8a4c"/>
+  <text x="301" y="213" text-anchor="middle" font-size="13" font-weight="bold" fill="#1f8a4c">I<tspan dy="3.5" font-size="9.5">B</tspan></text>
+  <polygon points="396,176 391,166 401,166" fill="#1f8a4c"/>
+  <text x="414" y="168" font-size="13" font-weight="bold" fill="#1f8a4c">I<tspan dy="3.5" font-size="9.5">C</tspan></text>
+  <polygon points="396,310 391,300 401,300" fill="#1f8a4c"/>
+  <text x="414" y="312" font-size="13" font-weight="bold" fill="#1f8a4c">I<tspan dy="3.5" font-size="9.5">E</tspan></text>
+
+  <rect x="30" y="348" width="460" height="28" fill="#d6e8f7"/>
+  <text x="42" y="368" font-size="16" font-weight="bold" fill="#1a3a6b">量測步驟（依手稿）</text>
+  <text x="42" y="402" font-size="14" fill="#1a3a6b">1. 自行假設 C、E</text>
+  <text x="42" y="428" font-size="14" fill="#1a3a6b">2. 手指放 B、C 位置</text>
+  <text x="42" y="454" font-size="14" fill="#1a3a6b">3. 電表黑棒 → C，紅棒 → E</text>
+  <text x="42" y="480" font-size="14" fill="#1a3a6b">4. 若指針偏轉幅度較大（低電阻）→ <tspan fill="#b8322c" font-weight="bold">假設正確</tspan></text>
+  <text x="42" y="506" font-size="14" fill="#1a3a6b">5. 否則 C、E 交換，再測一次確認</text>
+
+  <line x1="500" y1="100" x2="500" y2="506" stroke="#cccccc" stroke-width="1"/>
+
+  <rect x="510" y="92" width="460" height="30" fill="#d6e8f7"/>
+  <text x="740" y="113" text-anchor="middle" font-size="17" font-weight="bold" fill="#1a3a6b">PNP 電晶體</text>
+
+  <circle cx="610" cy="225" r="46" fill="#ffffff" stroke="#1a3a6b" stroke-width="2"/>
+  <path d="M 582,209 A 32,32 0 0 1 638,209" fill="none" stroke="#1a3a6b" stroke-width="1.2"/>
+  <line x1="610" y1="225" x2="635" y2="196" stroke="#1a3a6b" stroke-width="2"/>
+  <polygon points="635,196 626,199 632,205" fill="#1a3a6b"/>
+  <text x="610" y="292" text-anchor="middle" font-size="13" fill="#1a3a6b">指針電表</text>
+  <text x="610" y="311" text-anchor="middle" font-size="13" fill="#1a3a6b">R×1 kΩ</text>
+
+  <path d="M 646,196 L 720,322 L 874,322" fill="none" stroke="#111111" stroke-width="2.5"/>
+  <text x="780" y="342" text-anchor="middle" font-size="14" font-weight="bold" fill="#111111">⊕ 黑棒</text>
+  <path d="M 646,254 L 720,132 L 874,132" fill="none" stroke="#b8322c" stroke-width="2.5"/>
+  <text x="780" y="118" text-anchor="middle" font-size="14" font-weight="bold" fill="#b8322c">⊖ 紅棒</text>
+
+  <circle cx="850" cy="225" r="52" fill="#ffffff" stroke="#1a3a6b" stroke-width="2"/>
+  <line x1="830" y1="185" x2="830" y2="265" stroke="#1a3a6b" stroke-width="3"/>
+  <line x1="750" y1="225" x2="830" y2="225" stroke="#1a3a6b" stroke-width="2"/>
+  <text x="740" y="230" text-anchor="end" font-size="15" font-weight="bold" fill="#1a3a6b">B</text>
+  <line x1="830" y1="207" x2="874" y2="173" stroke="#1a3a6b" stroke-width="2"/>
+  <line x1="874" y1="173" x2="874" y2="126" stroke="#1a3a6b" stroke-width="2"/>
+  <line x1="830" y1="243" x2="874" y2="277" stroke="#1a3a6b" stroke-width="2"/>
+  <line x1="874" y1="277" x2="874" y2="322" stroke="#1a3a6b" stroke-width="2"/>
+  <polygon points="841,252 845,261 851,252" fill="#1a3a6b"/>
+  <text x="888" y="143" font-size="15" font-weight="bold" fill="#1a3a6b">C</text>
+  <text x="888" y="296" font-size="15" font-weight="bold" fill="#1a3a6b">E</text>
+
+  <path d="M 750,225 L 750,150 L 788,150" fill="none" stroke="#1a3a6b" stroke-width="2"/>
+  <rect x="788" y="140" width="40" height="20" rx="4" fill="#ffffff" stroke="#1a3a6b" stroke-width="1.5"/>
+  <path d="M 792,150 q 4.5,-7 9,0 t 9,0 t 9,0 t 9,0" fill="none" stroke="#1a3a6b" stroke-width="1.5"/>
+  <path d="M 828,150 L 874,150" fill="none" stroke="#1a3a6b" stroke-width="2"/>
+  <circle cx="874" cy="150" r="3.5" fill="#1a3a6b"/>
+  <circle cx="874" cy="126" r="3.5" fill="#b8322c"/>
+  <circle cx="874" cy="322" r="3.5" fill="#111111"/>
+  <text x="808" y="178" text-anchor="middle" font-size="13" fill="#1a3a6b">手指（人體電阻）</text>
+
+  <polygon points="774,225 784,220 784,230" fill="#1f8a4c"/>
+  <text x="779" y="213" text-anchor="middle" font-size="13" font-weight="bold" fill="#1f8a4c">I<tspan dy="3.5" font-size="9.5">B</tspan></text>
+  <polygon points="874,156 869,166 879,166" fill="#1f8a4c"/>
+  <text x="888" y="168" font-size="13" font-weight="bold" fill="#1f8a4c">I<tspan dy="3.5" font-size="9.5">C</tspan></text>
+  <polygon points="874,290 869,300 879,300" fill="#1f8a4c"/>
+  <text x="888" y="312" font-size="13" font-weight="bold" fill="#1f8a4c">I<tspan dy="3.5" font-size="9.5">E</tspan></text>
+
+  <rect x="510" y="348" width="460" height="28" fill="#d6e8f7"/>
+  <text x="522" y="368" font-size="16" font-weight="bold" fill="#1a3a6b">量測步驟（依手稿）</text>
+  <text x="522" y="402" font-size="14" fill="#1a3a6b">1. 自行假設 C、E</text>
+  <text x="522" y="428" font-size="14" fill="#1a3a6b">2. 手指放 B、C 位置</text>
+  <text x="522" y="454" font-size="14" fill="#1a3a6b">3. 電表黑棒 → E，紅棒 → C</text>
+  <text x="522" y="480" font-size="14" fill="#1a3a6b">4. 若指針偏轉幅度較大（低電阻）→ <tspan fill="#b8322c" font-weight="bold">假設正確</tspan></text>
+
+  <rect x="30" y="532" width="940" height="28" fill="#d6e8f7"/>
+  <text x="42" y="552" font-size="16" font-weight="bold" fill="#1a3a6b">儀表極性與方法註記</text>
+  <text x="42" y="590" font-size="14" fill="#1a3a6b">指針電表 R×1 kΩ 檔：黑棒 ⊕（內部電池正端）、紅棒 ⊖（內部電池負端）；手指當作電阻，接於基極(B)與集極(C)之間。</text>
+  <text x="42" y="616" font-size="14" fill="#1a3a6b">比較兩次假設的偏轉：幅度較大者（低電阻）為<tspan fill="#b8322c" font-weight="bold">假設正確</tspan>；兩次量測條件應相同。</text>
+
+  <text x="40" y="652" font-size="12.5" fill="#888888">依手繪隨堂作業筆記忠實重繪</text>
+  <text x="960" y="652" text-anchor="end" font-size="12.5" fill="#666666" fill-opacity="0.75">大安高工控制科張漢民</text>
+</svg>
