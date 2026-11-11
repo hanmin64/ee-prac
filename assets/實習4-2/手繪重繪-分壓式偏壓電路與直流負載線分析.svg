@@ -1,0 +1,266 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768" font-family="'Microsoft JhengHei','Noto Sans TC','PingFang TC',sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#b8322c"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1a3a6b"/>
+    </marker>
+    <marker id="arrow-axis" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#333333"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1376" height="768" fill="#ffffff"/>
+
+  <!-- Top Header -->
+  <text x="688" y="46" text-anchor="middle" font-size="28" font-weight="bold" fill="#1a3a6b">實習 4-2 工作二：分壓式偏壓電路與直流負載線分析</text>
+  <text x="688" y="72" text-anchor="middle" font-size="14" fill="#555555">隨堂重點手稿重繪 ｜ 2N2222 分壓偏壓電路、直流負載線方程式與 5 個工作點 (Q₁～Q₅) 標註</text>
+  <text x="1336" y="40" text-anchor="end" font-size="13" fill="#555555" opacity="0.75">大安高工控制科張漢民</text>
+  <line x1="40" y1="82" x2="1336" y2="82" stroke="#2b6cb0" stroke-width="2"/>
+
+  <!-- ==================== LEFT COLUMN: CIRCUIT SCHEMATIC ==================== -->
+  <rect x="40" y="98" width="570" height="32" rx="4" fill="#d6e8f7"/>
+  <text x="56" y="120" font-size="17" font-weight="bold" fill="#1a3a6b">分壓式偏壓電路 (Voltage-Divider Bias)</text>
+
+  <!-- Circuit Container -->
+  <rect x="40" y="138" width="570" height="600" rx="6" fill="#fcfdff" stroke="#cce0f5" stroke-width="1.5"/>
+
+  <!-- VCC Rail & Box -->
+  <line x1="120" y1="190" x2="440" y2="190" stroke="#1a3a6b" stroke-width="2.5"/>
+  <line x1="280" y1="160" x2="280" y2="190" stroke="#1a3a6b" stroke-width="2.5" marker-start="url(#arrow-blue)"/>
+  <text x="280" y="150" text-anchor="middle" font-size="18" font-weight="bold" fill="#1a3a6b">V<tspan dy="4" font-size="13">CC</tspan></text>
+  
+  <rect x="310" y="132" width="74" height="28" rx="4" fill="#fff5f5" stroke="#b8322c" stroke-width="1.8"/>
+  <text x="347" y="152" text-anchor="middle" font-size="16" font-weight="bold" fill="#b8322c">10 V</text>
+
+  <!-- Left Branch (Voltage Divider): RB1 and RB2 -->
+  <line x1="160" y1="190" x2="160" y2="230" stroke="#1a3a6b" stroke-width="2.5"/>
+  
+  <!-- RB1 Resistor -->
+  <rect x="145" y="230" width="30" height="65" fill="#ffffff" stroke="#1a3a6b" stroke-width="2.2"/>
+  <text x="130" y="260" text-anchor="end" font-size="16" font-weight="bold" fill="#1a3a6b">R<tspan dy="4" font-size="12">B1</tspan></text>
+  <text x="130" y="280" text-anchor="end" font-size="14" fill="#333333">51 kΩ</text>
+
+  <line x1="160" y1="295" x2="160" y2="370" stroke="#1a3a6b" stroke-width="2.5"/>
+  <!-- Base node dot -->
+  <circle cx="160" cy="370" r="4.5" fill="#1a3a6b"/>
+
+  <!-- RB2 Branch (R1 + VR) -->
+  <line x1="160" y1="370" x2="160" y2="410" stroke="#1a3a6b" stroke-width="2.5"/>
+  
+  <!-- R1 Resistor -->
+  <rect x="145" y="410" width="30" height="55" fill="#ffffff" stroke="#1a3a6b" stroke-width="2.2"/>
+  <text x="130" y="435" text-anchor="end" font-size="15" font-weight="bold" fill="#1a3a6b">R<tspan dy="4" font-size="11">1</tspan></text>
+  <text x="130" y="455" text-anchor="end" font-size="14" fill="#333333">2 kΩ</text>
+
+  <line x1="160" y1="465" x2="160" y2="495" stroke="#1a3a6b" stroke-width="2.5"/>
+
+  <!-- VR Variable Resistor -->
+  <rect x="145" y="495" width="30" height="60" fill="#ffffff" stroke="#1a3a6b" stroke-width="2.2"/>
+  <!-- Potentiometer arrow -->
+  <line x1="128" y1="545" x2="185" y2="505" stroke="#b8322c" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="130" y="515" text-anchor="end" font-size="16" font-weight="bold" fill="#1a3a6b">VR</text>
+  <text x="130" y="535" text-anchor="end" font-size="14" fill="#b8322c">50 kΩ</text>
+  <text x="130" y="555" text-anchor="end" font-size="12" fill="#666666">(多圈式)</text>
+
+  <!-- RB2 Curly Bracket annotation -->
+  <path d="M 75 375 Q 65 375 65 475 Q 65 485 55 485 Q 65 485 65 495 Q 65 595 75 595" fill="none" stroke="#666666" stroke-width="1.5"/>
+  <text x="48" y="490" text-anchor="end" font-size="17" font-weight="bold" fill="#1a3a6b">R<tspan dy="4" font-size="12">B2</tspan></text>
+
+  <line x1="160" y1="555" x2="160" y2="605" stroke="#1a3a6b" stroke-width="2.5"/>
+
+  <!-- Base lead to Transistor -->
+  <line x1="160" y1="370" x2="280" y2="370" stroke="#1a3a6b" stroke-width="2.5"/>
+  <!-- IB arrow -->
+  <line x1="185" y1="355" x2="235" y2="355" stroke="#b8322c" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="210" y="345" text-anchor="middle" font-size="15" font-weight="bold" fill="#b8322c">I<tspan dy="4" font-size="11">B</tspan><tspan dy="-4"> ≈ 0</tspan></text>
+
+  <!-- NPN Transistor (2N2222) -->
+  <circle cx="315" cy="370" r="34" fill="#ffffff" stroke="#1a3a6b" stroke-width="2"/>
+  <line x1="280" y1="345" x2="280" y2="395" stroke="#1a3a6b" stroke-width="3.5"/>
+  <!-- Base terminal -->
+  <line x1="265" y1="370" x2="280" y2="370" stroke="#1a3a6b" stroke-width="2.5"/>
+  <!-- Collector lead inside -->
+  <line x1="280" y1="355" x2="315" y2="338" stroke="#1a3a6b" stroke-width="2.5"/>
+  <line x1="315" y1="338" x2="315" y2="305" stroke="#1a3a6b" stroke-width="2.5"/>
+  <!-- Emitter lead inside with Arrow -->
+  <line x1="280" y1="385" x2="315" y2="402" stroke="#1a3a6b" stroke-width="2.5"/>
+  <polygon points="303,391 315,402 300,405" fill="#1a3a6b"/>
+  <line x1="315" y1="402" x2="315" y2="435" stroke="#1a3a6b" stroke-width="2.5"/>
+
+  <text x="358" y="376" font-size="16" font-weight="bold" fill="#1a3a6b">2N2222</text>
+  <text x="358" y="396" font-size="13" fill="#666666">(NPN 型)</text>
+
+  <!-- Right Branch: RC, Transistor, RE -->
+  <!-- RC Resistor -->
+  <line x1="400" y1="190" x2="400" y2="225" stroke="#1a3a6b" stroke-width="2.5"/>
+  <circle cx="400" cy="190" r="4.5" fill="#1a3a6b"/>
+  
+  <rect x="385" y="225" width="30" height="65" fill="#ffffff" stroke="#1a3a6b" stroke-width="2.2"/>
+  <text x="425" y="255" font-size="16" font-weight="bold" fill="#1a3a6b">R<tspan dy="4" font-size="12">C</tspan><tspan dy="-4"> = 2.2 kΩ</tspan></text>
+
+  <!-- IC Current Arrow -->
+  <line x1="420" y1="275" x2="420" y2="315" stroke="#1a3a6b" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="435" y="300" font-size="15" font-weight="bold" fill="#1a3a6b">I<tspan dy="4" font-size="11">C</tspan></text>
+
+  <line x1="400" y1="290" x2="400" y2="338" stroke="#1a3a6b" stroke-width="2.5"/>
+  <line x1="400" y1="338" x2="315" y2="338" stroke="#1a3a6b" stroke-width="2.5"/>
+  <circle cx="400" cy="338" r="4.5" fill="#1a3a6b"/>
+
+  <!-- VCEQ Voltage Label between C and E -->
+  <text x="450" y="350" font-size="16" font-weight="bold" fill="#b8322c">+</text>
+  <text x="450" y="385" font-size="16" font-weight="bold" fill="#b8322c">V<tspan dy="4" font-size="12">CEQ</tspan></text>
+  <text x="450" y="415" font-size="16" font-weight="bold" fill="#b8322c">−</text>
+
+  <!-- Emitter lead to RE -->
+  <line x1="315" y1="402" x2="400" y2="402" stroke="#1a3a6b" stroke-width="2.5"/>
+  <circle cx="400" cy="402" r="4.5" fill="#1a3a6b"/>
+  <line x1="400" y1="402" x2="400" y2="445" stroke="#1a3a6b" stroke-width="2.5"/>
+
+  <!-- RE Resistor -->
+  <rect x="385" y="445" width="30" height="65" fill="#ffffff" stroke="#1a3a6b" stroke-width="2.2"/>
+  <text x="425" y="475" font-size="16" font-weight="bold" fill="#1a3a6b">R<tspan dy="4" font-size="12">E</tspan><tspan dy="-4"> = 1 kΩ</tspan></text>
+
+  <!-- IE Current Arrow -->
+  <line x1="420" y1="495" x2="420" y2="535" stroke="#b8322c" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="435" y="520" font-size="15" font-weight="bold" fill="#b8322c">I<tspan dy="4" font-size="11">E</tspan><tspan dy="-4"> ≈ I</tspan><tspan dy="4" font-size="11">C</tspan></text>
+
+  <line x1="400" y1="510" x2="400" y2="605" stroke="#1a3a6b" stroke-width="2.5"/>
+
+  <!-- Bottom Ground Line -->
+  <line x1="140" y1="605" x2="420" y2="605" stroke="#1a3a6b" stroke-width="2.5"/>
+  <!-- Ground Symbol -->
+  <line x1="280" y1="605" x2="280" y2="625" stroke="#1a3a6b" stroke-width="2.5"/>
+  <line x1="260" y1="625" x2="300" y2="625" stroke="#1a3a6b" stroke-width="2.5"/>
+  <line x1="268" y1="632" x2="292" y2="632" stroke="#1a3a6b" stroke-width="2.2"/>
+  <line x1="274" y1="639" x2="286" y2="639" stroke="#1a3a6b" stroke-width="1.8"/>
+
+  <!-- Highlight Box: DC Loop Resistance -->
+  <rect x="65" y="662" width="520" height="62" rx="6" fill="#edf7ff" stroke="#2b6cb0" stroke-width="1.2"/>
+  <text x="80" y="687" font-size="15" font-weight="bold" fill="#1a3a6b">輸出直流迴路總電阻：</text>
+  <text x="245" y="687" font-size="15" font-weight="bold" fill="#b8322c">R<tspan dy="3" font-size="11">dc</tspan><tspan dy="-3"> = R</tspan><tspan dy="3" font-size="11">C</tspan><tspan dy="-3"> + R</tspan><tspan dy="3" font-size="11">E</tspan><tspan dy="-3"> = 2.2 kΩ + 1 kΩ = 3.2 kΩ</tspan></text>
+  <text x="80" y="710" font-size="13.5" fill="#555555">可變電阻 VR (50 kΩ) 供精密微調基極電位，使 V<tspan dy="3" font-size="10">CE</tspan><tspan dy="-3"> 穩定落於各指定工作點。</tspan></text>
+
+
+  <!-- ==================== RIGHT COLUMN: EQUATIONS & LOAD LINE ==================== -->
+  <!-- Upper Section: Output Loop Equations -->
+  <rect x="650" y="98" width="686" height="32" rx="4" fill="#d6e8f7"/>
+  <text x="666" y="120" font-size="17" font-weight="bold" fill="#1a3a6b">輸出方程式與直流負載線 (DC Load Line) 推導</text>
+
+  <rect x="650" y="138" width="686" height="140" rx="6" fill="#fcfdff" stroke="#cce0f5" stroke-width="1.5"/>
+  
+  <text x="670" y="168" font-size="16" font-weight="bold" fill="#1a3a6b">【輸出迴路 KVL 方程式】</text>
+  <text x="890" y="168" font-size="16" font-weight="bold" fill="#222222">V<tspan dy="4" font-size="12">CC</tspan><tspan dy="-4"> = I</tspan><tspan dy="4" font-size="12">C</tspan><tspan dy="-4"> R</tspan><tspan dy="4" font-size="12">C</tspan><tspan dy="-4"> + V</tspan><tspan dy="4" font-size="12">CE</tspan><tspan dy="-4"> + I</tspan><tspan dy="4" font-size="12">E</tspan><tspan dy="-4"> R</tspan><tspan dy="4" font-size="12">E</tspan></text>
+  
+  <text x="670" y="198" font-size="15" fill="#666666">因為 β ≫ 1，忽略基極微小電流 I<tspan dy="3" font-size="11">B</tspan><tspan dy="-3">，則 </tspan><tspan font-weight="bold" fill="#1a3a6b">I<tspan dy="3" font-size="11">E</tspan><tspan dy="-3"> ≈ I</tspan><tspan dy="3" font-size="11">C</tspan></tspan></text>
+
+  <text x="670" y="232" font-size="16" font-weight="bold" fill="#b8322c">※ 直流負載線方程式：</text>
+  <text x="845" y="232" font-size="16" font-weight="bold" fill="#b8322c">V<tspan dy="4" font-size="12">CC</tspan><tspan dy="-4"> = I</tspan><tspan dy="4" font-size="12">C</tspan><tspan dy="-4"> (R</tspan><tspan dy="4" font-size="12">C</tspan><tspan dy="-4"> + R</tspan><tspan dy="4" font-size="12">E</tspan><tspan dy="-4">) + V</tspan><tspan dy="4" font-size="12">CE</tspan></text>
+  
+  <text x="670" y="260" font-size="15" fill="#1a3a6b">代入本電路數值： <tspan font-weight="bold" fill="#b8322c">10 = I<tspan dy="3" font-size="11">C</tspan><tspan dy="-3"> × 3.2 kΩ + V</tspan><tspan dy="3" font-size="11">CE</tspan></tspan>  ⟹  <tspan font-weight="bold" fill="#1a3a6b">I<tspan dy="3" font-size="11">C</tspan><tspan dy="-3"> = (10 − V</tspan><tspan dy="3" font-size="11">CE</tspan><tspan dy="-3">) ／ 3.2 kΩ</tspan></tspan></text>
+
+  <!-- Lower Section: Output Characteristic Curve & Load Line -->
+  <rect x="650" y="290" width="686" height="32" rx="4" fill="#d6e8f7"/>
+  <text x="666" y="312" font-size="17" font-weight="bold" fill="#1a3a6b">輸出特性曲線 (V<tspan dy="3" font-size="12">CE</tspan><tspan dy="-3"> − I</tspan><tspan dy="3" font-size="12">C</tspan><tspan dy="-3">) 與 5 個工作點 (Q₁～Q₅)</tspan></text>
+
+  <rect x="650" y="330" width="686" height="408" rx="6" fill="#fcfdff" stroke="#cce0f5" stroke-width="1.5"/>
+
+  <!-- Graph Grid & Axes -->
+  <!-- Regions shading -->
+  <!-- Saturation Region (vertical strip) -->
+  <rect x="730" y="390" width="25" height="280" fill="#fff2f0" opacity="0.85"/>
+  <line x1="755" y1="390" x2="755" y2="670" stroke="#e57373" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="738" y="378" font-size="13" font-weight="bold" fill="#c62828">飽和區</text>
+
+  <!-- Cutoff Region (horizontal strip) -->
+  <rect x="730" y="658" width="540" height="12" fill="#f3e5f5" opacity="0.85"/>
+  <text x="1230" y="695" font-size="13" font-weight="bold" fill="#6a1b9a">截止區</text>
+
+  <!-- Active Region Label -->
+  <text x="960" y="430" text-anchor="middle" font-size="16" font-weight="bold" fill="#1565c0">主　動　區</text>
+
+  <!-- Axes -->
+  <!-- X-axis: VCE (V) -->
+  <line x1="720" y1="670" x2="1270" y2="670" stroke="#333333" stroke-width="2" marker-end="url(#arrow-axis)"/>
+  <text x="1275" y="675" font-size="15" font-weight="bold" fill="#333333">V<tspan dy="4" font-size="11">CE</tspan><tspan dy="-4"> (V)</tspan></text>
+
+  <!-- Y-axis: IC (mA) -->
+  <line x1="730" y1="680" x2="730" y2="365" stroke="#333333" stroke-width="2" marker-end="url(#arrow-axis)"/>
+  <text x="730" y="355" text-anchor="middle" font-size="15" font-weight="bold" fill="#333333">I<tspan dy="4" font-size="11">C</tspan><tspan dy="-4"> (mA)</tspan></text>
+
+  <!-- Axis Ticks & Values -->
+  <!-- VCE Ticks: 0V(730), 2V(820), 5V(955), 8V(1090), 10V(1180) -->
+  <line x1="730" y1="670" x2="730" y2="676" stroke="#333333" stroke-width="2"/>
+  <text x="725" y="694" text-anchor="end" font-size="13" fill="#333333">0</text>
+
+  <line x1="820" y1="670" x2="820" y2="676" stroke="#333333" stroke-width="2"/>
+  <text x="820" y="694" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">2 V</text>
+
+  <line x1="955" y1="670" x2="955" y2="676" stroke="#333333" stroke-width="2"/>
+  <text x="955" y="694" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">5 V</text>
+
+  <line x1="1090" y1="670" x2="1090" y2="676" stroke="#333333" stroke-width="2"/>
+  <text x="1090" y="694" text-anchor="middle" font-size="13" font-weight="bold" fill="#333333">8 V</text>
+
+  <line x1="1180" y1="670" x2="1180" y2="676" stroke="#333333" stroke-width="2"/>
+  <text x="1180" y="694" text-anchor="middle" font-size="13" font-weight="bold" fill="#b8322c">10 V (V<tspan dy="3" font-size="10">CC</tspan><tspan dy="-3">)</tspan></text>
+
+  <!-- IC Ticks: 0(670), 0.625(620), 1.5625(545), 2.5(470), 3.125(420) -->
+  <line x1="724" y1="620" x2="730" y2="620" stroke="#333333" stroke-width="2"/>
+  <text x="720" y="624" text-anchor="end" font-size="12.5" fill="#333333">0.625</text>
+
+  <line x1="724" y1="545" x2="730" y2="545" stroke="#333333" stroke-width="2"/>
+  <text x="720" y="549" text-anchor="end" font-size="12.5" fill="#333333">1.5625</text>
+
+  <line x1="724" y1="470" x2="730" y2="470" stroke="#333333" stroke-width="2"/>
+  <text x="720" y="474" text-anchor="end" font-size="12.5" fill="#333333">2.5</text>
+
+  <line x1="724" y1="420" x2="730" y2="420" stroke="#333333" stroke-width="2"/>
+  <text x="720" y="415" text-anchor="end" font-size="13" font-weight="bold" fill="#b8322c">I<tspan dy="3" font-size="10">C(sat)</tspan><tspan dy="-3"> = 3.125</tspan></text>
+
+  <!-- DC Load Line (Red Line) -->
+  <line x1="730" y1="420" x2="1180" y2="670" stroke="#b8322c" stroke-width="3.2"/>
+  <text x="1080" y="520" font-size="16" font-weight="bold" fill="#b8322c">直流負載線</text>
+
+  <!-- Projection Dashed Lines for Q-points -->
+  <!-- Q4: (820, 470) -->
+  <line x1="820" y1="670" x2="820" y2="470" stroke="#888888" stroke-width="1.2" stroke-dasharray="4,4"/>
+  <line x1="730" y1="470" x2="820" y2="470" stroke="#888888" stroke-width="1.2" stroke-dasharray="4,4"/>
+
+  <!-- Q3: (955, 545) -->
+  <line x1="955" y1="670" x2="955" y2="545" stroke="#888888" stroke-width="1.2" stroke-dasharray="4,4"/>
+  <line x1="730" y1="545" x2="955" y2="545" stroke="#888888" stroke-width="1.2" stroke-dasharray="4,4"/>
+
+  <!-- Q2: (1090, 620) -->
+  <line x1="1090" y1="670" x2="1090" y2="620" stroke="#888888" stroke-width="1.2" stroke-dasharray="4,4"/>
+  <line x1="730" y1="620" x2="1090" y2="620" stroke="#888888" stroke-width="1.2" stroke-dasharray="4,4"/>
+
+  <!-- 5 Operating Points Dots & Text Callouts -->
+  <!-- Q5: Saturation (730, 420) -->
+  <circle cx="730" cy="420" r="6" fill="#b8322c" stroke="#ffffff" stroke-width="1.5"/>
+  <text x="745" y="435" font-size="14.5" font-weight="bold" fill="#b8322c">Q<tspan dy="3" font-size="11">5</tspan><tspan dy="-3"> (0 V, 3.125 mA)</tspan></text>
+  <text x="745" y="452" font-size="12" fill="#c62828">[飽和點]</text>
+
+  <!-- Q4: Near Saturation (820, 470) -->
+  <circle cx="820" cy="470" r="6" fill="#b8322c" stroke="#ffffff" stroke-width="1.5"/>
+  <text x="835" y="465" font-size="14.5" font-weight="bold" fill="#b8322c">Q<tspan dy="3" font-size="11">4</tspan><tspan dy="-3"> (2 V, 2.5 mA)</tspan></text>
+  <text x="835" y="482" font-size="12" fill="#666666">[靠近飽和]</text>
+
+  <!-- Q3: Midpoint (955, 545) -->
+  <circle cx="955" cy="545" r="6.5" fill="#b8322c" stroke="#ffffff" stroke-width="1.5"/>
+  <text x="970" y="540" font-size="15" font-weight="bold" fill="#b8322c">Q<tspan dy="3" font-size="11">3</tspan><tspan dy="-3"> (5 V, 1.5625 mA)</tspan></text>
+  <text x="970" y="558" font-size="12.5" font-weight="bold" fill="#1565c0">[主動區中點]</text>
+
+  <!-- Q2: Near Cutoff (1090, 620) -->
+  <circle cx="1090" cy="620" r="6" fill="#b8322c" stroke="#ffffff" stroke-width="1.5"/>
+  <text x="1105" y="615" font-size="14.5" font-weight="bold" fill="#b8322c">Q<tspan dy="3" font-size="11">2</tspan><tspan dy="-3"> (8 V, 0.625 mA)</tspan></text>
+  <text x="1105" y="632" font-size="12" fill="#666666">[靠近截止]</text>
+
+  <!-- Q1: Cutoff (1180, 670) -->
+  <circle cx="1180" cy="670" r="6" fill="#b8322c" stroke="#ffffff" stroke-width="1.5"/>
+  <text x="1160" y="652" font-size="14.5" font-weight="bold" fill="#b8322c">Q<tspan dy="3" font-size="11">1</tspan><tspan dy="-3"> (10 V, 0 A)</tspan></text>
+  <text x="1160" y="667" font-size="12" fill="#6a1b9a">[截止點]</text>
+
+</svg>

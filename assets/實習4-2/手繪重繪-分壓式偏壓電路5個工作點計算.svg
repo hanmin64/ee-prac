@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768" font-family="'Microsoft JhengHei','Noto Sans TC','PingFang TC',sans-serif">
+  <!-- Background -->
+  <rect width="1376" height="768" fill="#ffffff"/>
+
+  <!-- Top Header -->
+  <text x="688" y="46" text-anchor="middle" font-size="28" font-weight="bold" fill="#1a3a6b">實習 4-2 工作二：直流負載線 5 個工作點理論計算與設定</text>
+  <text x="688" y="72" text-anchor="middle" font-size="14" fill="#555555">隨堂重點手稿重繪 ｜ 表 4-4 與圖 4-21 任務擴充：由 3 個工作點改為 5 個工作點之推導與設定條件</text>
+  <text x="1336" y="40" text-anchor="end" font-size="13" fill="#555555" opacity="0.75">大安高工控制科張漢民</text>
+  <line x1="40" y1="82" x2="1336" y2="82" stroke="#2b6cb0" stroke-width="2"/>
+
+  <!-- ==================== LEFT COLUMN: EXPERIMENT MISSION & OBJECTIVES ==================== -->
+  <rect x="40" y="98" width="530" height="32" rx="4" fill="#d6e8f7"/>
+  <text x="56" y="120" font-size="17" font-weight="bold" fill="#1a3a6b">實習任務說明與擴充目的</text>
+
+  <!-- Left Container -->
+  <rect x="40" y="138" width="530" height="600" rx="6" fill="#fcfdff" stroke="#cce0f5" stroke-width="1.5"/>
+
+  <!-- Mission comparison block -->
+  <rect x="60" y="158" width="490" height="150" rx="6" fill="#f0f7ff" stroke="#2b6cb0" stroke-width="1.2"/>
+  <text x="80" y="188" font-size="17" font-weight="bold" fill="#1a3a6b">【原實習手冊規劃】</text>
+  <text x="100" y="215" font-size="15" fill="#555555">① 表 4-4：僅測量 <tspan font-weight="bold" fill="#b8322c">3 個工作點</tspan>（截止點、工作點 Q、飽和點）</text>
+  <text x="100" y="240" font-size="15" fill="#555555">② 圖 4-21：僅繪製 <tspan font-weight="bold" fill="#b8322c">3 個工作點</tspan> 於直流負載線上</text>
+  <text x="80" y="275" font-size="15.5" font-weight="bold" fill="#b8322c">⟹ 本實習任務重要改良：全面「改成 5 個工作點」！</text>
+
+  <!-- Why 5 points? -->
+  <text x="80" y="335" font-size="16" font-weight="bold" fill="#1a3a6b">【擴充為 5 個工作點之教學目的】</text>
+
+  <rect x="60" y="350" width="490" height="215" rx="6" fill="#ffffff" stroke="#e0e0e0" stroke-width="1.2"/>
+  
+  <text x="80" y="378" font-size="15" font-weight="bold" fill="#2b6cb0">1. 完整涵蓋主動放大區的全域軌跡：</text>
+  <text x="98" y="402" font-size="14" fill="#333333">原 3 點只有兩端極值與中點，擴充「靠近飽和 Q<tspan dy="3" font-size="10">4</tspan><tspan dy="-3">」與「靠近截止 Q</tspan><tspan dy="3" font-size="10">2</tspan><tspan dy="-3">」後，能更具體驗證主動區內的線性變化關係。</tspan></text>
+
+  <text x="80" y="435" font-size="15" font-weight="bold" fill="#2b6cb0">2. 驗證直流負載線的筆直斜率：</text>
+  <text x="98" y="459" font-size="14" fill="#333333">5 個點在 V<tspan dy="3" font-size="10">CE</tspan><tspan dy="-3"> 與 I</tspan><tspan dy="3" font-size="10">C</tspan><tspan dy="-3"> 特性圖上連成一直線，能讓學生親自檢驗負載線理論與實測之吻合度。</tspan></text>
+
+  <text x="80" y="492" font-size="15" font-weight="bold" fill="#2b6cb0">3. 訓練多圈可變電阻 VR 之精細調諧：</text>
+  <text x="98" y="516" font-size="14" fill="#333333">由截止 (10 V) 逐步調至 8 V ➔ 5 V ➔ 2 V ➔ 飽和 (0 V)，讓學生清楚感受基極偏壓對輸出工作點的連續平滑操控。</text>
+
+  <!-- Circuit constants box -->
+  <rect x="60" y="580" width="490" height="135" rx="6" fill="#fff9f0" stroke="#f59e0b" stroke-width="1.2"/>
+  <text x="80" y="608" font-size="15.5" font-weight="bold" fill="#b45309">【本實習電路核心常數】</text>
+  <text x="80" y="635" font-size="14.5" fill="#333333">• 電源電壓：<tspan font-weight="bold" fill="#b8322c">V<tspan dy="3" font-size="11">CC</tspan><tspan dy="-3"> = 10 V</tspan></tspan></text>
+  <text x="80" y="660" font-size="14.5" fill="#333333">• 輸出迴路總電阻：<tspan font-weight="bold" fill="#1a3a6b">R<tspan dy="3" font-size="11">C</tspan><tspan dy="-3"> + R</tspan><tspan dy="3" font-size="11">E</tspan><tspan dy="-3"> = 2.2 kΩ + 1 kΩ = 3.2 kΩ</tspan></tspan></text>
+  <text x="80" y="688" font-size="15" font-weight="bold" fill="#b8322c">• 集極電流通用計算式：I<tspan dy="3" font-size="11">C</tspan><tspan dy="-3"> = (10 − V</tspan><tspan dy="3" font-size="11">CE</tspan><tspan dy="-3">) ／ 3.2 kΩ</tspan></text>
+
+
+  <!-- ==================== RIGHT COLUMN: 5 Q-POINTS CALCULATIONS & TABLE ==================== -->
+  <rect x="600" y="98" width="736" height="32" rx="4" fill="#d6e8f7"/>
+  <text x="616" y="120" font-size="17" font-weight="bold" fill="#1a3a6b">5 個工作點詳細理論推導與設定對照表</text>
+
+  <!-- Right Container -->
+  <rect x="600" y="138" width="736" height="600" rx="6" fill="#fcfdff" stroke="#cce0f5" stroke-width="1.5"/>
+
+  <!-- Step-by-step Formulas (5 Points) -->
+  <!-- 1. Cutoff -->
+  <rect x="620" y="155" width="696" height="52" rx="5" fill="#faf5ff" stroke="#9333ea" stroke-width="1"/>
+  <text x="635" y="186" font-size="15.5" font-weight="bold" fill="#7e22ce">1. 截止區 (Q₁)：</text>
+  <text x="765" y="186" font-size="15" font-weight="bold" fill="#1a3a6b">V<tspan dy="3" font-size="11">CE1</tspan><tspan dy="-3"> = 10 V (V</tspan><tspan dy="3" font-size="11">CC</tspan><tspan dy="-3">)</tspan>，<tspan fill="#b8322c">I<tspan dy="3" font-size="11">C1</tspan><tspan dy="-3"> = 0 A</tspan></tspan></text>
+  <text x="1055" y="186" font-size="13.5" fill="#666666">⟹ VR 調至使基極電位最低（電晶體未導通）</text>
+
+  <!-- 2. Saturation -->
+  <rect x="620" y="214" width="696" height="52" rx="5" fill="#fef2f2" stroke="#dc2626" stroke-width="1"/>
+  <text x="635" y="245" font-size="15.5" font-weight="bold" fill="#dc2626">2. 飽和區 (Q₅)：</text>
+  <text x="765" y="245" font-size="15" font-weight="bold" fill="#1a3a6b">V<tspan dy="3" font-size="11">CE5</tspan><tspan dy="-3"> = 0 V</tspan>，<tspan fill="#b8322c">I<tspan dy="3" font-size="11">C5</tspan><tspan dy="-3"> = 10 ／ 3.2 kΩ = 3.125 mA</tspan></tspan></text>
+  <text x="1055" y="245" font-size="13.5" fill="#666666">⟹ 提高基極電位使晶體完全飽和導通</text>
+
+  <!-- 3. Active Midpoint -->
+  <rect x="620" y="273" width="696" height="52" rx="5" fill="#eff6ff" stroke="#2563eb" stroke-width="1.2"/>
+  <text x="635" y="304" font-size="15.5" font-weight="bold" fill="#1d4ed8">3. 主動區中點 (Q₃)：</text>
+  <text x="765" y="304" font-size="15" font-weight="bold" fill="#1a3a6b">V<tspan dy="3" font-size="11">CE3</tspan><tspan dy="-3"> = 5 V (½V</tspan><tspan dy="3" font-size="11">CC</tspan><tspan dy="-3">)</tspan>，<tspan fill="#b8322c">I<tspan dy="3" font-size="11">C3</tspan><tspan dy="-3"> = (10 − 5) ／ 3.2 kΩ = 1.5625 mA</tspan></tspan></text>
+  <text x="1090" y="304" font-size="13.5" font-weight="bold" fill="#1d4ed8">[最佳工作點，訊號動態範圍最大]</text>
+
+  <!-- 4. Active Near Saturation -->
+  <rect x="620" y="332" width="696" height="52" rx="5" fill="#fff7ed" stroke="#ea580c" stroke-width="1"/>
+  <text x="635" y="363" font-size="15.5" font-weight="bold" fill="#c2410c">4. 主動區靠近飽和 (Q₄)：</text>
+  <text x="815" y="363" font-size="15" font-weight="bold" fill="#1a3a6b">V<tspan dy="3" font-size="11">CE4</tspan><tspan dy="-3"> = 2 V</tspan>，<tspan fill="#b8322c">I<tspan dy="3" font-size="11">C4</tspan><tspan dy="-3"> = (10 − 2) ／ 3.2 kΩ = 2.5 mA</tspan></tspan></text>
+
+  <!-- 5. Active Near Cutoff -->
+  <rect x="620" y="391" width="696" height="52" rx="5" fill="#f8fafc" stroke="#64748b" stroke-width="1"/>
+  <text x="635" y="422" font-size="15.5" font-weight="bold" fill="#475569">5. 主動區靠近截止 (Q₂)：</text>
+  <text x="815" y="422" font-size="15" font-weight="bold" fill="#1a3a6b">V<tspan dy="3" font-size="11">CE2</tspan><tspan dy="-3"> = 8 V</tspan>，<tspan fill="#b8322c">I<tspan dy="3" font-size="11">C2</tspan><tspan dy="-3"> = (10 − 8) ／ 3.2 kΩ = 0.625 mA</tspan></tspan></text>
+
+  <!-- Table 4-4 Extended: 5 Operating Points -->
+  <text x="620" y="475" font-size="16.5" font-weight="bold" fill="#1a3a6b">▼ 表 4-4（擴充版）：分壓式偏壓電路 5 個工作點 V<tspan dy="3" font-size="11">CE</tspan><tspan dy="-3"> 與 I</tspan><tspan dy="3" font-size="11">C</tspan><tspan dy="-3"> 理論及設定表</tspan></text>
+
+  <g transform="translate(620, 490)">
+    <!-- Table Header -->
+    <rect x="0" y="0" width="696" height="36" fill="#1a3a6b" rx="4"/>
+    <text x="50" y="23" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#ffffff">工作點</text>
+    <text x="160" y="23" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#ffffff">工作區域</text>
+    <text x="280" y="23" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#ffffff">V<tspan dy="3" font-size="10">CE</tspan><tspan dy="-3"> 目標值</tspan></text>
+    <text x="410" y="23" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#ffffff">I<tspan dy="3" font-size="10">C</tspan><tspan dy="-3"> 理論計算值</tspan></text>
+    <text x="550" y="23" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#ffffff">VR 調整方向</text>
+    <text x="650" y="23" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#ffffff">負載線位置</text>
+
+    <!-- Row 1: Q1 -->
+    <rect x="0" y="36" width="696" height="34" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="50" y="58" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#7e22ce">Q₁</text>
+    <text x="160" y="58" text-anchor="middle" font-size="14" fill="#333333">截止區</text>
+    <text x="280" y="58" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#1a3a6b">10 V</text>
+    <text x="410" y="58" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#b8322c">0 mA</text>
+    <text x="550" y="58" text-anchor="middle" font-size="13" fill="#666666">調至最低 (V<tspan dy="2" font-size="9">B</tspan><tspan dy="-2"> 最小)</tspan></text>
+    <text x="650" y="58" text-anchor="middle" font-size="13.5" fill="#666666">橫軸截距</text>
+
+    <!-- Row 2: Q2 -->
+    <rect x="0" y="70" width="696" height="34" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="50" y="92" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#475569">Q₂</text>
+    <text x="160" y="92" text-anchor="middle" font-size="14" fill="#333333">主動區（靠近截止）</text>
+    <text x="280" y="92" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#1a3a6b">8 V</text>
+    <text x="410" y="92" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#b8322c">0.625 mA</text>
+    <text x="550" y="92" text-anchor="middle" font-size="13" fill="#666666">由低阻微增</text>
+    <text x="650" y="92" text-anchor="middle" font-size="13.5" fill="#666666">負載線右段</text>
+
+    <!-- Row 3: Q3 -->
+    <rect x="0" y="104" width="696" height="34" fill="#eff6ff" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="50" y="126" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#1d4ed8">Q₃</text>
+    <text x="160" y="126" text-anchor="middle" font-size="14" font-weight="bold" fill="#1d4ed8">主動區（中心點）</text>
+    <text x="280" y="126" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#1d4ed8">5 V</text>
+    <text x="410" y="126" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#b8322c">1.5625 mA</text>
+    <text x="550" y="126" text-anchor="middle" font-size="13" font-weight="bold" fill="#1d4ed8">適中 (V<tspan dy="2" font-size="9">CE</tspan><tspan dy="-2"> ≈ ½V</tspan><tspan dy="2" font-size="9">CC</tspan><tspan dy="-2">)</tspan></text>
+    <text x="650" y="126" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1d4ed8">負載線中點</text>
+
+    <!-- Row 4: Q4 -->
+    <rect x="0" y="138" width="696" height="34" fill="#fff7ed" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="50" y="160" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#c2410c">Q₄</text>
+    <text x="160" y="160" text-anchor="middle" font-size="14" fill="#333333">主動區（靠近飽和）</text>
+    <text x="280" y="160" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#1a3a6b">2 V</text>
+    <text x="410" y="160" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#b8322c">2.5 mA</text>
+    <text x="550" y="160" text-anchor="middle" font-size="13" fill="#666666">繼續調大偏壓</text>
+    <text x="650" y="160" text-anchor="middle" font-size="13.5" fill="#666666">負載線左段</text>
+
+    <!-- Row 5: Q5 -->
+    <rect x="0" y="172" width="696" height="34" fill="#fef2f2" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="50" y="194" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#dc2626">Q₅</text>
+    <text x="160" y="194" text-anchor="middle" font-size="14" fill="#333333">飽和區</text>
+    <text x="280" y="194" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#1a3a6b">0 V (≈0.2 V)</text>
+    <text x="410" y="194" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#b8322c">3.125 mA</text>
+    <text x="550" y="194" text-anchor="middle" font-size="13" fill="#666666">調至最高偏壓</text>
+    <text x="650" y="194" text-anchor="middle" font-size="13.5" fill="#666666">縱軸截距</text>
+  </g>
+
+  <!-- Bottom Tip -->
+  <text x="620" y="722" font-size="13.5" fill="#666666">註：實際量測時飽和電壓 V<tspan dy="3" font-size="10">CE(sat)</tspan><tspan dy="-3"> 約為 0.1～0.2 V，表內 0 V 為理想負載線縱軸截距之理論計算基準。</tspan></text>
+</svg>
