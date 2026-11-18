@@ -1,0 +1,244 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1376 768" width="1376" height="768" font-family="'Times New Roman','Noto Sans TC','Microsoft JhengHei',sans-serif">
+  <defs>
+    <clipPath id="card-left-clip">
+      <rect x="38" y="88" width="626" height="646" rx="16" ry="16"/>
+    </clipPath>
+    <clipPath id="card-right-clip">
+      <rect x="712" y="88" width="626" height="646" rx="16" ry="16"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1376" height="768" fill="#ffffff"/>
+
+  <!-- Top Title -->
+  <text x="688" y="52" text-anchor="middle" font-size="28" font-weight="bold" fill="#000000" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif">實習 3-4 工作一：測量 BJT 的 hFE 值 (β) 與接腳判別</text>
+  <text x="1336" y="38" text-anchor="end" font-size="14" fill="#718096" font-family="'Microsoft JhengHei',sans-serif">大安高工控制科張漢民</text>
+
+  <!-- ==================== LEFT CARD ==================== -->
+  <g clip-path="url(#card-left-clip)">
+    <rect x="38" y="88" width="626" height="646" fill="#ffffff"/>
+    <rect x="38" y="88" width="626" height="52" fill="#cfe2f3"/>
+    <line x1="38" y1="140" x2="664" y2="140" stroke="#0f2942" stroke-width="3.5"/>
+  </g>
+  <rect x="38" y="88" width="626" height="646" rx="16" ry="16" fill="none" stroke="#0f2942" stroke-width="3.5"/>
+  <text x="351" y="123" text-anchor="middle" font-size="22" font-weight="bold" fill="#0f2942" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif">指針電表檔位設定與 hFE 刻度表頭</text>
+
+  <!-- Left Card Body -->
+  <!-- Section 1: Range & Zero Adjust -->
+  <text x="65" y="176" font-size="20" font-weight="bold" fill="#000000" font-family="'Microsoft JhengHei',sans-serif">【電表檔位與歸零校正】</text>
+  <text x="75" y="208" font-size="17" fill="#000000" font-family="'Microsoft JhengHei',sans-serif">● 指針電表：</text>
+  <rect x="180" y="186" width="245" height="34" rx="4" fill="#ffffff" stroke="#b8322c" stroke-width="2"/>
+  <text x="302" y="209" text-anchor="middle" font-size="17" font-weight="bold" fill="#b8322c" font-family="'Microsoft JhengHei',sans-serif">R × 10 Ω (hFE &amp; LED)</text>
+
+  <rect x="445" y="186" width="125" height="34" rx="4" fill="#fff5f5" stroke="#b8322c" stroke-width="2"/>
+  <text x="507" y="209" text-anchor="middle" font-size="17" font-weight="bold" fill="#b8322c" font-family="'Microsoft JhengHei',sans-serif">歸零調整</text>
+  <text x="75" y="240" font-size="15" fill="#555555" font-family="'Microsoft JhengHei',sans-serif">※ 量測前將測試棒短接，調整 0 Ω 旋鈕使指針精確對準 0 刻度。</text>
+
+  <!-- Section 2: 8-Pin Test Socket (slightly more compact) -->
+  <text x="65" y="278" font-size="20" font-weight="bold" fill="#000000" font-family="'Microsoft JhengHei',sans-serif">【電表內建 8 孔測試插座】</text>
+  
+  <g transform="translate(115, 295)">
+    <rect x="0" y="0" width="460" height="100" rx="8" fill="#f8fafc" stroke="#0f2942" stroke-width="2"/>
+    
+    <!-- NPN Row -->
+    <text x="45" y="38" text-anchor="middle" font-size="18" font-weight="bold" fill="#b8322c" font-family="'Microsoft JhengHei',sans-serif">NPN</text>
+    <circle cx="125" cy="32" r="13" fill="#ffffff" stroke="#0f2942" stroke-width="2"/>
+    <circle cx="125" cy="32" r="4.5" fill="#0f2942"/>
+    <text x="125" y="15" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f2942">E</text>
+
+    <circle cx="205" cy="32" r="13" fill="#ffffff" stroke="#0f2942" stroke-width="2"/>
+    <circle cx="205" cy="32" r="4.5" fill="#0f2942"/>
+    <text x="205" y="15" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f2942">B</text>
+
+    <circle cx="285" cy="32" r="13" fill="#ffffff" stroke="#0f2942" stroke-width="2"/>
+    <circle cx="285" cy="32" r="4.5" fill="#0f2942"/>
+    <text x="285" y="15" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f2942">C</text>
+
+    <circle cx="365" cy="32" r="13" fill="#ffffff" stroke="#0f2942" stroke-width="2"/>
+    <circle cx="365" cy="32" r="4.5" fill="#0f2942"/>
+    <text x="365" y="15" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f2942">E</text>
+
+    <!-- PNP Row -->
+    <text x="45" y="78" text-anchor="middle" font-size="18" font-weight="bold" fill="#b8322c" font-family="'Microsoft JhengHei',sans-serif">PNP</text>
+    <circle cx="125" cy="72" r="13" fill="#ffffff" stroke="#0f2942" stroke-width="2"/>
+    <circle cx="125" cy="72" r="4.5" fill="#0f2942"/>
+    <text x="125" y="95" text-anchor="middle" font-size="14" font-weight="bold" fill="#718096">E</text>
+
+    <circle cx="205" cy="72" r="13" fill="#ffffff" stroke="#0f2942" stroke-width="2"/>
+    <circle cx="205" cy="72" r="4.5" fill="#0f2942"/>
+    <text x="205" y="95" text-anchor="middle" font-size="14" font-weight="bold" fill="#718096">B</text>
+
+    <circle cx="285" cy="72" r="13" fill="#ffffff" stroke="#0f2942" stroke-width="2"/>
+    <circle cx="285" cy="72" r="4.5" fill="#0f2942"/>
+    <text x="285" y="95" text-anchor="middle" font-size="14" font-weight="bold" fill="#718096">C</text>
+
+    <circle cx="365" cy="72" r="13" fill="#ffffff" stroke="#0f2942" stroke-width="2"/>
+    <circle cx="365" cy="72" r="4.5" fill="#0f2942"/>
+    <text x="365" y="95" text-anchor="middle" font-size="14" font-weight="bold" fill="#718096">E</text>
+
+    <text x="420" y="48" font-size="12" fill="#718096" font-family="'Microsoft JhengHei',sans-serif">左右雙 E</text>
+    <text x="420" y="66" font-size="12" fill="#718096" font-family="'Microsoft JhengHei',sans-serif">便利直插</text>
+  </g>
+
+  <!-- Section 3: Meter Dial Face (Arc lowered & badge elevated to completely avoid overlap) -->
+  <text x="65" y="432" font-size="20" font-weight="bold" fill="#000000" font-family="'Microsoft JhengHei',sans-serif">【專用 hFE 弧形刻度讀數】</text>
+
+  <g transform="translate(95, 452)">
+    <!-- Red Needle reading badge: Positioned safely at top (y=2 to y=32), arc starts below at y=70 -->
+    <rect x="225" y="4" width="150" height="30" rx="4" fill="#fff5f5" stroke="#b8322c" stroke-width="2"/>
+    <text x="300" y="25" text-anchor="middle" font-size="16" font-weight="bold" fill="#b8322c" font-family="'Microsoft JhengHei',sans-serif">β 約 200 ～ 300</text>
+    <!-- Pointer leader line from badge bottom down to needle tip -->
+    <line x1="262" y1="34" x2="262" y2="72" stroke="#b8322c" stroke-width="1.8" stroke-dasharray="2,2"/>
+
+    <!-- Dial Arc (Apex at y=76, comfortably below the badge at y=4..34) -->
+    <path d="M 30 200 A 240 240 0 0 1 480 200" fill="none" stroke="#0f2942" stroke-width="2.5"/>
+    <circle cx="255" cy="255" r="7" fill="#0f2942"/>
+
+    <!-- Ticks & Numbers -->
+    <line x1="45" y1="185" x2="38" y2="173" stroke="#0f2942" stroke-width="2.5"/>
+    <text x="33" y="165" text-anchor="middle" font-size="19" font-weight="bold" fill="#0f2942">∞</text>
+
+    <line x1="110" y1="133" x2="105" y2="120" stroke="#0f2942" stroke-width="2"/>
+    <text x="98" y="110" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f2942">50</text>
+
+    <line x1="175" y1="98" x2="172" y2="85" stroke="#0f2942" stroke-width="2"/>
+    <text x="168" y="75" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f2942">100</text>
+
+    <line x1="240" y1="82" x2="239" y2="68" stroke="#0f2942" stroke-width="2.5"/>
+    <text x="238" y="58" text-anchor="middle" font-size="16" font-weight="bold" fill="#0f2942">200</text>
+
+    <line x1="285" y1="84" x2="288" y2="70" stroke="#0f2942" stroke-width="2"/>
+    <text x="290" y="60" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f2942">300</text>
+
+    <line x1="345" y1="103" x2="352" y2="90" stroke="#0f2942" stroke-width="2"/>
+    <text x="360" y="80" text-anchor="middle" font-size="15" font-weight="bold" fill="#0f2942">500</text>
+
+    <line x1="400" y1="138" x2="410" y2="126" stroke="#0f2942" stroke-width="2"/>
+    <text x="424" y="118" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f2942">1000</text>
+
+    <line x1="465" y1="185" x2="472" y2="173" stroke="#0f2942" stroke-width="2.5"/>
+    <text x="480" y="165" text-anchor="middle" font-size="18" font-weight="bold" fill="#0f2942">0</text>
+
+    <!-- Needle pointing to 250 (angle near vertical) -->
+    <line x1="255" y1="255" x2="262" y2="78" stroke="#b8322c" stroke-width="2.5"/>
+
+    <!-- Labels on Dial -->
+    <rect x="40" y="215" width="75" height="32" rx="4" fill="#ffffff" stroke="#0f2942" stroke-width="1.5"/>
+    <text x="77" y="237" text-anchor="middle" font-size="18" font-weight="bold" fill="#0f2942">h<tspan font-size="13" dy="2">FE</tspan></text>
+
+    <!-- Formula with horizontal fraction line -->
+    <g transform="translate(390, 210)">
+      <text x="0" y="22" font-size="20" font-style="italic" font-weight="bold" fill="#000000">β = </text>
+      <text x="36" y="12" text-anchor="middle" font-size="16" font-style="italic" font-weight="bold" fill="#b8322c">IC</text>
+      <line x1="25" y1="17" x2="47" y2="17" stroke="#b8322c" stroke-width="1.8"/>
+      <text x="36" y="32" text-anchor="middle" font-size="16" font-style="italic" font-weight="bold" fill="#b8322c">IB</text>
+    </g>
+  </g>
+  <text x="351" y="715" text-anchor="middle" font-size="15" fill="#4a5568" font-family="'Microsoft JhengHei',sans-serif">※ 讀數請認明專用 <tspan font-weight="bold" fill="#b8322c">hFE 刻度線</tspan>，切勿誤讀頂端之電阻 (Ω) 刻度。</text>
+
+
+  <!-- ==================== RIGHT CARD ==================== -->
+  <g clip-path="url(#card-right-clip)">
+    <rect x="712" y="88" width="626" height="646" fill="#ffffff"/>
+    <rect x="712" y="88" width="626" height="52" fill="#cfe2f3"/>
+    <line x1="712" y1="140" x2="1338" y2="140" stroke="#0f2942" stroke-width="3.5"/>
+  </g>
+  <rect x="712" y="88" width="626" height="646" rx="16" ry="16" fill="none" stroke="#0f2942" stroke-width="3.5"/>
+  <text x="1025" y="123" text-anchor="middle" font-size="22" font-weight="bold" fill="#0f2942" font-family="'Microsoft JhengHei','Noto Sans TC',sans-serif">常用電晶體外觀、接腳排列與 β 實測值</text>
+
+  <!-- Right Card Body -->
+  <text x="740" y="176" font-size="20" font-weight="bold" fill="#000000" font-family="'Microsoft JhengHei',sans-serif">【三種 TO-92 電晶體接腳與 β 比較】</text>
+
+  <!-- 3 Transistors side by side -->
+  <!-- Transistor 1: 2SC945 -->
+  <g transform="translate(740, 198)">
+    <rect x="0" y="0" width="180" height="315" rx="8" fill="#f8fafc" stroke="#cbd5e0" stroke-width="1.5"/>
+    <text x="90" y="26" text-anchor="middle" font-size="15" font-weight="bold" fill="#b8322c">NPN</text>
+    <text x="90" y="50" text-anchor="middle" font-size="18" font-weight="bold" fill="#0f2942">2SC945</text>
+
+    <!-- TO-92 Drawing -->
+    <path d="M 30 75 Q 90 55 150 75 L 150 145 Q 90 155 30 145 Z" fill="#2d3748" stroke="#0f2942" stroke-width="2"/>
+    <rect x="42" y="73" width="96" height="65" rx="3" fill="#4a5568"/>
+    <text x="90" y="110" text-anchor="middle" font-size="13" font-weight="bold" fill="#e2e8f0">C945</text>
+    <line x1="55" y1="145" x2="45" y2="198" stroke="#4a5568" stroke-width="3.5"/>
+    <line x1="90" y1="148" x2="90" y2="198" stroke="#4a5568" stroke-width="3.5"/>
+    <line x1="125" y1="145" x2="135" y2="198" stroke="#4a5568" stroke-width="3.5"/>
+
+    <text x="45" y="218" text-anchor="middle" font-size="15" font-weight="bold" fill="#4a5568">1</text>
+    <text x="90" y="218" text-anchor="middle" font-size="15" font-weight="bold" fill="#4a5568">2</text>
+    <text x="135" y="218" text-anchor="middle" font-size="15" font-weight="bold" fill="#4a5568">3</text>
+
+    <text x="45" y="244" text-anchor="middle" font-size="17" font-weight="bold" fill="#b8322c">E</text>
+    <text x="90" y="244" text-anchor="middle" font-size="17" font-weight="bold" fill="#b8322c">C</text>
+    <text x="135" y="244" text-anchor="middle" font-size="17" font-weight="bold" fill="#b8322c">B</text>
+
+    <rect x="15" y="264" width="150" height="36" rx="6" fill="#fff5f5" stroke="#b8322c" stroke-width="2"/>
+    <text x="90" y="288" text-anchor="middle" font-size="18" font-style="italic" font-weight="bold" fill="#b8322c">β = <tspan font-style="normal">296</tspan></text>
+  </g>
+
+  <!-- Transistor 2: 2SA733 -->
+  <g transform="translate(935, 198)">
+    <rect x="0" y="0" width="180" height="315" rx="8" fill="#f8fafc" stroke="#cbd5e0" stroke-width="1.5"/>
+    <text x="90" y="26" text-anchor="middle" font-size="15" font-weight="bold" fill="#2b6cb0">PNP</text>
+    <text x="90" y="50" text-anchor="middle" font-size="18" font-weight="bold" fill="#0f2942">2SA733</text>
+
+    <path d="M 30 75 Q 90 55 150 75 L 150 145 Q 90 155 30 145 Z" fill="#2d3748" stroke="#0f2942" stroke-width="2"/>
+    <rect x="42" y="73" width="96" height="65" rx="3" fill="#4a5568"/>
+    <text x="90" y="110" text-anchor="middle" font-size="13" font-weight="bold" fill="#e2e8f0">A733</text>
+    <line x1="55" y1="145" x2="45" y2="198" stroke="#4a5568" stroke-width="3.5"/>
+    <line x1="90" y1="148" x2="90" y2="198" stroke="#4a5568" stroke-width="3.5"/>
+    <line x1="125" y1="145" x2="135" y2="198" stroke="#4a5568" stroke-width="3.5"/>
+
+    <text x="45" y="218" text-anchor="middle" font-size="15" font-weight="bold" fill="#4a5568">1</text>
+    <text x="90" y="218" text-anchor="middle" font-size="15" font-weight="bold" fill="#4a5568">2</text>
+    <text x="135" y="218" text-anchor="middle" font-size="15" font-weight="bold" fill="#4a5568">3</text>
+
+    <text x="45" y="244" text-anchor="middle" font-size="17" font-weight="bold" fill="#b8322c">E</text>
+    <text x="90" y="244" text-anchor="middle" font-size="17" font-weight="bold" fill="#b8322c">C</text>
+    <text x="135" y="244" text-anchor="middle" font-size="17" font-weight="bold" fill="#b8322c">B</text>
+
+    <rect x="15" y="264" width="150" height="36" rx="6" fill="#fff5f5" stroke="#b8322c" stroke-width="2"/>
+    <text x="90" y="288" text-anchor="middle" font-size="18" font-style="italic" font-weight="bold" fill="#b8322c">β = <tspan font-style="normal">301</tspan></text>
+  </g>
+
+  <!-- Transistor 3: 2N2222 -->
+  <g transform="translate(1130, 198)">
+    <rect x="0" y="0" width="180" height="315" rx="8" fill="#fffaf0" stroke="#b8322c" stroke-width="2"/>
+    <text x="90" y="26" text-anchor="middle" font-size="15" font-weight="bold" fill="#b8322c">NPN</text>
+    <text x="90" y="50" text-anchor="middle" font-size="18" font-weight="bold" fill="#0f2942">2N2222</text>
+
+    <path d="M 30 75 Q 90 55 150 75 L 150 145 Q 90 155 30 145 Z" fill="#2d3748" stroke="#0f2942" stroke-width="2"/>
+    <rect x="42" y="73" width="96" height="65" rx="3" fill="#4a5568"/>
+    <text x="90" y="110" text-anchor="middle" font-size="13" font-weight="bold" fill="#e2e8f0">2N2222</text>
+    <line x1="55" y1="145" x2="45" y2="198" stroke="#4a5568" stroke-width="3.5"/>
+    <line x1="90" y1="148" x2="90" y2="198" stroke="#4a5568" stroke-width="3.5"/>
+    <line x1="125" y1="145" x2="135" y2="198" stroke="#4a5568" stroke-width="3.5"/>
+
+    <text x="45" y="218" text-anchor="middle" font-size="15" font-weight="bold" fill="#4a5568">1</text>
+    <text x="90" y="218" text-anchor="middle" font-size="15" font-weight="bold" fill="#4a5568">2</text>
+    <text x="135" y="218" text-anchor="middle" font-size="15" font-weight="bold" fill="#4a5568">3</text>
+
+    <text x="45" y="244" text-anchor="middle" font-size="17" font-weight="bold" fill="#b8322c">E</text>
+    <text x="90" y="244" text-anchor="middle" font-size="17" font-weight="bold" fill="#b8322c">B</text>
+    <text x="135" y="244" text-anchor="middle" font-size="17" font-weight="bold" fill="#b8322c">C</text>
+
+    <rect x="15" y="264" width="150" height="36" rx="6" fill="#fff5f5" stroke="#b8322c" stroke-width="2"/>
+    <text x="90" y="288" text-anchor="middle" font-size="18" font-style="italic" font-weight="bold" fill="#b8322c">β = <tspan font-style="normal">232</tspan></text>
+  </g>
+
+  <!-- Section 4: Teaching Conclusion & Transition (Split into clean lines, completely clear of right border!) -->
+  <g transform="translate(740, 535)">
+    <text x="0" y="24" font-size="20" font-weight="bold" fill="#000000" font-family="'Microsoft JhengHei',sans-serif">【教學結論與工作二銜接】</text>
+    
+    <text x="15" y="58" font-size="17" fill="#000000" font-family="'Microsoft JhengHei',sans-serif">① <tspan font-weight="bold" fill="#b8322c">本實習測得之結果誤差極大：</tspan></text>
+    <text x="42" y="84" font-size="15" fill="#4a5568" font-family="'Microsoft JhengHei',sans-serif">指針電表插座僅提供極小直流偏壓，各元件接觸阻抗大且測試電流不穩定。</text>
+
+    <text x="15" y="118" font-size="17" font-weight="bold" fill="#0f2942" font-family="'Microsoft JhengHei',sans-serif">※ ② 實習 3-4 工作二改進做法：</text>
+    <!-- Line 1 of transition -->
+    <text x="42" y="145" font-size="16.5" fill="#000000" font-family="'Microsoft JhengHei',sans-serif">改採<tspan font-weight="bold" fill="#b8322c">【直接在偏壓電路中量測 2N2222 的 IB, IC, IE】</tspan></text>
+    <!-- Line 2 of transition (Wrapped cleanly, well inside right margin!) -->
+    <text x="42" y="172" font-size="16.5" font-weight="bold" fill="#b8322c" font-family="'Microsoft JhengHei',sans-serif">由實測電流換算增益，結果更加精準！</text>
+  </g>
+
+</svg>
